@@ -1,9 +1,7 @@
-#' @export
 get_e <- function(efficiency_of_standard) {
     return((efficiency_of_standard * 0.01) + 1)
 }
 
-#' @export
 set_efficiency <- function(genes, efficiency, default = 100) {
     no_known_efficiency <- setdiff(genes, names(efficiency))
     default_efficiencies <- NULL
@@ -14,13 +12,11 @@ set_efficiency <- function(genes, efficiency, default = 100) {
     return(c(efficiency, default_efficiencies))
 }
 
-#' @export
 control_mean <- function(df, treat = "control") {
     contr <- df[df$treatment == treat, ]
     return(tapply(contr$cq, contr$gene, mean))
 }
 
-#' @export
 delta_cq <- function(df, contr_mean) {
     dcq <- lapply(seq_along(contr_mean), function(x) {
         contr_mean[x] - df[df$gene == names(contr_mean)[x], ]$cq
@@ -29,7 +25,6 @@ delta_cq <- function(df, contr_mean) {
     return(dcq)
 }
 
-#' @export
 ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
     targets <- setdiff(names(e_val), hkg_)
     cmp <- data.frame(sapply(targets, function(x) {
@@ -47,7 +42,6 @@ ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
 }
 
 #' @import stats
-#' @export
 mean_relative_expression <- function(df) {
     mean_aggr <- stats::aggregate(df[, -1], by = list(df$treatment), FUN = mean, simplify = TRUE)
     names(mean_aggr)[names(mean_aggr) == "Group.1"] <- "treatment"
