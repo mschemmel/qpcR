@@ -8,8 +8,9 @@ Calculate relative gene expression of qPCR data
 library(qpcR)
 
 # import data
-data(qpcRdata1)
-data(qpcRdata2)
+# setwd() first
+qpcRdata1 <- read.table("./data/example1.tsv", sep = "\t", head = TRUE)
+qpcRdata2 <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
 
 # set primer efficiency
 eff1 <- c("HKG" = 100)
