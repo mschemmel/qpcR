@@ -2,8 +2,7 @@
 # main function
 #' @export
 qpcR <- function(df, hkg = NULL, efficiency = NULL) {
-    df <- df[c("gene", "treatment", "cq")]
-    df$cq <- as.numeric(gsub(",", ".", df$cq))
+    df <- prepare(df)
 
     # calculate E value
     e_val <- unlist(lapply(set_efficiency(unique(df$gene), efficiency), get_e))

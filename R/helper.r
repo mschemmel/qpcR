@@ -1,3 +1,9 @@
+prepare <- function(df) {
+    df <- df[c("gene", "treatment", "cq")]
+    df$cq <- as.numeric(gsub(",", ".", df$cq))
+    return(df)
+}
+
 get_e <- function(efficiency_of_standard) {
     return((efficiency_of_standard * 0.01) + 1)
 }

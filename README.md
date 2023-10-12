@@ -1,9 +1,11 @@
-# qpcR
+qpcR
 ---
+
 Calculate relative gene expression of qPCR data
 
-# Quick start
+Quick start
 ---
+
 ```r
 library(qpcR)
 
