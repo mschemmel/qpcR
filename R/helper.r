@@ -1,9 +1,17 @@
+#' prepare input data
+#' @param df input data.frame of qPCR data
+#' @examples
+#' prepare(df)
 prepare <- function(df) {
     df <- df[c("gene", "treatment", "cq")]
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     return(df)
 }
 
+#' calculate E value of standard samples
+#' @param efficiency_of_standard efficiency values in percent (list, 0-100)
+#' @examples
+#' get_e(named_list)
 get_e <- function(efficiency_of_standard) {
     return((efficiency_of_standard * 0.01) + 1)
 }
