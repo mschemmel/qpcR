@@ -64,5 +64,6 @@ ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
 mean_relative_expression <- function(df) {
     mean_aggr <- stats::aggregate(df[, -1], by = list(df$treatment), FUN = mean, simplify = TRUE)
     names(mean_aggr)[names(mean_aggr) == "Group.1"] <- "treatment"
+    names(mean_aggr)[names(mean_aggr) == "x"] <- "relative mean expression"
     return(mean_aggr)
 }
