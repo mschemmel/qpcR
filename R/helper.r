@@ -3,9 +3,17 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
-    df <- df[c("gene", "treatment", "cq")]
+    df <- df[c("gene", "treatment", "cq", "brep", "trep")]
     df$cq <- as.numeric(gsub(",", ".", df$cq))
+    df$id <- paste0(df$treatment, df$brep, df$trep)
     return(df)
+}
+
+cleanup <- function(df, hkg_) {
+    lapply(setdiff(unique(df$gene), hkg_), function(x) {
+        pair_comp <- df[df$gene %in% c(x, hkg_), ]
+        subset(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], select = -c(brep, trep, id))
+    })
 }
 
 #' calculate E value of standard samples
@@ -40,12 +48,9 @@ delta_cq <- function(df, contr_mean) {
 }
 
 ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
-    targets <- setdiff(names(e_val), hkg_)
-    cmp <- data.frame(sapply(targets, function(x) {
-                e_val[[x]]^d_cq[[x]] / e_val[[hkg_]]^d_cq[[hkg_]]
-    })) #TODO: preserve names during lapply
-
-    cpratiodata <- cbind(treatment = treatm, cmp)
+    target <- setdiff(names(e_val), hkg_)
+    cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
+    cpratiodata <- data.frame(treatment = treatm, cmp = cmp)
     cpratio_control <- cpratiodata[cpratiodata$treatment == "control", ][names(cpratiodata) != "treatment"]
     cpratiodata <- cpratiodata[names(cpratiodata) != "treatment"]
     mean_ratio <- lapply(cpratio_control, mean)
