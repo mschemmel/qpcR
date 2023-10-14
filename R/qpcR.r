@@ -1,4 +1,3 @@
-
 # main function
 #' @export
 qpcR <- function(df, hkg = NULL, efficiency = NULL) {
