@@ -23,15 +23,11 @@ ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
     cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
     cpratio <- data.frame(treatment = treatm, cmp = cmp)
     rbyr <- cpratio$cmp / mean(cpratio[cpratio$treatment == "control", ]$cmp)
-    return(data.frame(treatment = treatm, as.numeric(rbyr)))
+    return(data.frame(treatment = treatm, rbyr = as.numeric(rbyr)))
 }
 
-#' @import stats
 mean_relative_expression <- function(df) {
-    mean_aggr <- stats::aggregate(df[, -1], by = list(df$treatment), FUN = mean, simplify = TRUE)
-    names(mean_aggr)[names(mean_aggr) == "Group.1"] <- "treatment"
-    names(mean_aggr)[names(mean_aggr) == "x"] <- "relative mean expression"
-    return(mean_aggr)
+    return(tapply(df$rbyr, df$treatment, FUN = mean))
 }
 
 pair_wise <- function(data_list, e_values, hkg) {
