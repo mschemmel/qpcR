@@ -22,8 +22,7 @@ ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
     target <- setdiff(names(e_val), hkg_)
     cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
     cpratio <- data.frame(treatment = treatm, cmp = cmp)
-    mean_ratio <- mean(cpratio[cpratio$treatment == "control", ]$cmp)
-    rbyr <- cpratio$cmp / mean_ratio
+    rbyr <- cpratio$cmp / mean(cpratio[cpratio$treatment == "control", ]$cmp)
     return(data.frame(treatment = treatm, as.numeric(rbyr)))
 }
 
