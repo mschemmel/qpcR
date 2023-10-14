@@ -1,25 +1,25 @@
-treatment	gene	cq
-control	HKG	21.95
-control	HKG	21.95
-control	HKG	21.88
-control	HKG	22.16
-control	HKG	21.49
-control	HKG	21.55
-infected	HKG	22.38
-infected	HKG	22.05
-infected	HKG	21.3
-infected	HKG	21.83
-infected	HKG	21.61
-infected	HKG	21.99
-control	gene1	37.41
-control	gene1	38.27
-control	gene1	38.02
-control	gene1	37.44
-control	gene1	35.85
-control	gene1	36.27
-infected	gene1	39.12
-infected	gene1	36.82
-infected	gene1	35.33
-infected	gene1	36.18
-infected	gene1	37.53
-infected	gene1	37.57
+treatment	gene	cq	brep	trep
+control	HKG	21.95	1	1
+control	HKG	21.95	1	2
+control	HKG	21.88	2	1
+control	HKG	22.16	2	2
+control	HKG	21.49	3	1
+control	HKG	21.55	3	2
+infected	HKG	22.38	1	1
+infected	HKG	22.05	1	2
+infected	HKG	21.3	2	1
+infected	HKG	21.83	2	2
+infected	HKG	21.61	3	1
+infected	HKG	21.99	3	2
+control	gene1	37.41	1	1
+control	gene1	38.27	1	2
+control	gene1	38.02	2	1
+control	gene1	37.44	2	2
+control	gene1	35.85	3	1
+control	gene1	36.27	3	2
+infected	gene1	39.12	1	1
+infected	gene1	36.82	1	2
+infected	gene1	35.33	2	1
+infected	gene1	36.18	2	2
+infected	gene1	37.53	3	1
+infected	gene1	37.57	3	2
