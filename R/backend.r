@@ -21,14 +21,10 @@ delta_cq <- function(df, contr_mean) {
 ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
     target <- setdiff(names(e_val), hkg_)
     cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
-    cpratiodata <- data.frame(treatment = treatm, cmp = cmp)
-    cpratio_control <- cpratiodata[cpratiodata$treatment == "control", ][names(cpratiodata) != "treatment"]
-    cpratiodata <- cpratiodata[names(cpratiodata) != "treatment"]
-    mean_ratio <- lapply(cpratio_control, mean)
-    rbyr <- data.frame(sapply(seq_along(mean_ratio), function(x) {
-                cpratiodata[names(cpratiodata) == names(mean_ratio)[x]] / mean_ratio[x]
-    }))
-    return(cbind(treatment = treatm, rbyr))
+    cpratio <- data.frame(treatment = treatm, cmp = cmp)
+    mean_ratio <- mean(cpratio[cpratio$treatment == "control", ]$cmp)
+    rbyr <- cpratio$cmp / mean_ratio
+    return(data.frame(treatment = treatm, as.numeric(rbyr)))
 }
 
 #' @import stats
