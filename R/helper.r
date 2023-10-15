@@ -17,6 +17,12 @@ get_e <- function(efficiency_of_standard) {
     return((efficiency_of_standard * 0.01) + 1)
 }
 
+#' set efficiency of genes
+#' @param genes character vector of gene names
+#' @param efficiency named list of percentual efficiency of genes
+#' @param default efficiency if not specified
+#' @examples
+#' set_efficiency(c("gene1", "gene2"), list("gene1" = 98, "gene2" = 95))
 set_efficiency <- function(genes, efficiency, default = 100) {
     no_known_efficiency <- setdiff(genes, names(efficiency))
     default_efficiencies <- NULL
@@ -25,4 +31,12 @@ set_efficiency <- function(genes, efficiency, default = 100) {
         names(default_efficiencies) <- no_known_efficiency
     }
     return(c(efficiency, default_efficiencies))
+}
+
+#' select control group of data
+#' @param df data frame of provided genes
+#' @examples
+#' get_control_group(df)
+get_control_group <- function(df, control = "control") {
+    return(df[df$treatment == control, ])
 }
