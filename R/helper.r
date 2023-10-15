@@ -26,3 +26,7 @@ set_efficiency <- function(genes, efficiency, default = 100) {
     }
     return(c(efficiency, default_efficiencies))
 }
+
+get_control_group <- function(df, control = "control") {
+    return(df[df$treatment == control, ])
+}

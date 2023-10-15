@@ -5,8 +5,8 @@ cleanup <- function(df, hkg_) {
     })
 }
 
-control_mean <- function(df, treat = "control") {
-    contr <- df[df$treatment == treat, ]
+control_mean <- function(df) {
+    contr <- get_control_group(df)
     return(tapply(contr$cq, contr$gene, mean))
 }
 
@@ -22,7 +22,7 @@ ratio_by_mean_ratio <- function(d_cq, e_val, hkg_, treatm) {
     target <- setdiff(names(e_val), hkg_)
     cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
     cpratio <- data.frame(treatment = treatm, cmp = cmp)
-    rbyr <- cpratio$cmp / mean(cpratio[cpratio$treatment == "control", ]$cmp)
+    rbyr <- cpratio$cmp / mean(get_control_group(cpratio)$cmp)
     return(data.frame(treatment = treatm, rbyr = as.numeric(rbyr)))
 }
 
