@@ -1,4 +1,9 @@
-# main function
+#' main function to perform calculation of mean relative expression of qpcr data
+#' @param df data frame of qpcr data
+#' @param hkg character vector of housekeeping genes
+#' @param efficiency named list of efficiency values
+#' @examples
+#' qpcr(df, hkg = c("HKG"))
 #' @export
 qpcR <- function(df, hkg = NULL, efficiency = NULL) {
     dat_clean <- cleanup(prepare(df), hkg)
