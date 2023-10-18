@@ -3,9 +3,7 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
-    df <- df[c("gene", "treatment", "cq", "brep", "trep")]
     df$cq <- as.numeric(gsub(",", ".", df$cq))
-    df$id <- paste0(df$treatment, df$brep, df$trep)
     return(df)
 }
 
@@ -37,6 +35,7 @@ set_efficiency <- function(genes, efficiency, default = 100) {
 #' @param df data frame of provided genes
 #' @examples
 #' get_control_group(df)
-get_control_group <- function(df, control = "control") {
+get_control_group <- function(df) {
+    control <- get("control_group", qenv)
     return(df[df$treatment == control, ])
 }

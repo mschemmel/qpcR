@@ -1,13 +1,25 @@
+#' Create chunks of groups for calculation
+#' @param df data frame of expression data
+#' @param groups character vector of requested groups to compare
+#' @examples
+#' make_groups(df, groups = c("plate", "diet", "timepoint"))
+make_groups <- function(df, groups) {
+    return(split(df, as.list(df[groups]), drop = TRUE))
+}
+
 #' Remove NA sample wise as foundation of valid mean relative expression calculation
-#' @param df initial data frame of expression data
+#' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
 #' @param hkg_ character string of provided housekeeping genes
 #' @examples
 #' cleanup(df, khg_ = c("HKG"))
-cleanup <- function(df, hkg_) {
-    lapply(setdiff(unique(df$gene), hkg_), function(x) {
-        pair_comp <- df[df$gene %in% c(x, hkg_), ]
-        subset(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], select = -c(brep, trep, id))
-    })
+cleanup <- function(list_of_groups, hkg_) {
+    unlist(lapply(list_of_groups, function(gr) {
+        gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
+        lapply(setdiff(unique(gr$gene), hkg_), function(x) {
+            pair_comp <- gr[gr$gene %in% c(x, hkg_), ]
+            subset(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], select = -c(brep, trep, id))
+        })
+    }), recursive = FALSE)
 }
 
 #' get mean expression values of all control groups
