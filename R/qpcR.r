@@ -7,14 +7,13 @@ qenv <- new.env()
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
-qpcR <- function(df, hkg = NULL, efficiency = NULL, cmp = "control") {
+qpcR <- function(df, hkg = NULL, efficiency = NULL, cmp = "control", groups = NULL) {
     assign("control_group", cmp, qenv)
-
-    dat_clean <- cleanup(prepare(df), hkg)
-    # calculate E value
+    prep_data <- prepare(df)
+    requested_groups <- make_groups(prep_data, groups)
+    data_clean <- cleanup(requested_groups, hkg)
     e_val <- unlist(lapply(set_efficiency(unique(df$gene), efficiency), get_e))
-    # get mean of control groups
-    rel_expr <- pair_wise(dat_clean, e_val, hkg)
+    rel_expr <- pair_wise(data_clean, e_val, hkg)
     names(rel_expr) <- setdiff(unique(df$gene), hkg)
-    data.frame(rel_expr)
+    return(rel_expr)
 }

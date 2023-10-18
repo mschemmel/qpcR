@@ -3,9 +3,7 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
-    df <- df[c("gene", "treatment", "cq", "brep", "trep")]
     df$cq <- as.numeric(gsub(",", ".", df$cq))
-    df$id <- paste0(df$treatment, df$brep, df$trep)
     return(df)
 }
 
