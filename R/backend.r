@@ -53,10 +53,9 @@ delta_cq <- function(df, contr_mean) {
 #' ratio_by_mean_ratio(d_cq, e_val, hkg_, treatm)
 ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg_ = hkg) {
     target <- setdiff(names(e_val), hkg_)
-    cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
     cpratio <- df[c("treatment", "gene", get("groups", qenv))]
-    cpratio$cmp <- cmp
-    cpratio$rbyr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
+    cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
+    cpratio$repxr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
     return(cpratio[cpratio$gene != hkg_, ])
 }
 
