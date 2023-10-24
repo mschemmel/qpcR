@@ -51,12 +51,12 @@ delta_cq <- function(df, contr_mean) {
 #' @param treatm character vector of treatments
 #' @examples
 #' ratio_by_mean_ratio(d_cq, e_val, hkg_, treatm)
-ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg_ = hkg) {
-    target <- setdiff(names(e_val), hkg_)
+ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
+    target <- setdiff(names(e_val), hkg)
     cpratio <- df[c("treatment", "gene", get("groups", qenv))]
-    cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg_]]^d_cq[[hkg_]]
+    cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg]]^d_cq[[hkg]]
     cpratio$repxr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
-    return(cpratio[cpratio$gene != hkg_, ])
+    return(cpratio[cpratio$gene != hkg, ][, -which(names(cpratio) %in% c("cmp"))])
 }
 
 #' calculate mean relative expression
@@ -77,6 +77,6 @@ pair_wise <- function(data_list, e_values, hkg) {
     return(lapply(data_list, function(x) {
                 cmean <- control_mean(x)
                 dcq <- delta_cq(x, cmean)
-                ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg_ = hkg)
+                ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
     }))
 }
