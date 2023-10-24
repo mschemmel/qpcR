@@ -7,13 +7,14 @@ qenv <- new.env()
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
-qpcR <- function(df, hkg = NULL, efficiency = NULL, cmp = "control", groups = NULL) {
-    assign("control_group", cmp, qenv)
+qpcR <- function(df, hkg = NULL, cmp = NULL, efficiency = NULL, reference = "control", groups = NULL) {
+    assign("control_group", reference, qenv)
+    assign("groups", groups, qenv)
+    assign("compare", cmp, qenv)
     prep_data <- prepare(df)
     requested_groups <- make_groups(prep_data, groups)
     data_clean <- cleanup(requested_groups, hkg)
     e_val <- unlist(lapply(set_efficiency(unique(df$gene), efficiency), get_e))
     rel_expr <- pair_wise(data_clean, e_val, hkg)
-    names(rel_expr) <- setdiff(unique(df$gene), hkg)
-    return(rel_expr)
+    return(do.call("rbind", unname(rel_expr)))
 }
