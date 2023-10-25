@@ -12,7 +12,7 @@ make_groups <- function(df, groups) {
 #' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
 #' @param hkg_ character string of provided housekeeping genes
 #' @examples
-#' cleanup(df, khg_ = c("HKG"))
+#' cleanup(list_of_groups, khg_ = c("HKG"))
 cleanup <- function(list_of_groups, hkg_) {
     unlist(lapply(list_of_groups, function(gr) {
         gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
@@ -46,12 +46,13 @@ delta_cq <- function(df, contr_mean) {
 }
 
 #' calculate the ratio compared to the mean ratio per gene
+#' @param df data frame of requested groups
 #' @param d_cq object of delta_cq
 #' @param e_val named list of efficiency values
 #' @param hkg_ character vector of housekeeping genes
 #' @param treatm character vector of treatments
 #' @examples
-#' ratio_by_mean_ratio(d_cq, e_val, hkg_, treatm)
+#' ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
     target <- setdiff(names(e_val), hkg)
     cpratio <- df[c("treatment", "gene", get("groups", qenv))]
