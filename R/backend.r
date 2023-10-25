@@ -55,7 +55,7 @@ ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
     target <- setdiff(names(e_val), hkg)
     cpratio <- df[c("treatment", "gene", get("groups", qenv))]
     cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg]]^d_cq[[hkg]]
-    cpratio$repxr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
+    cpratio$rexpr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
     return(cpratio[cpratio$gene != hkg, ][, -which(names(cpratio) %in% c("cmp"))])
 }
 
