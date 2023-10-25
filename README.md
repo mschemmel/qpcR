@@ -3,20 +3,29 @@ qpcR
 
 Calculate relative gene expression of qPCR data
 
+Minimal requirement of input data
+---
+The minimal structure of the input data has to contain following information: `gene`, `treatment`, `cq`, `brep` and `trep`.
+
+| Column | Description |
+|--------|-------------|
+| gene   | all investigated gene names |
+| treatment | variable to compare | 
+| cq | cq value measured by qPCR machine |
+| brep | number of biological replication |
+| trep | number of technical replication |
+
+An example dataset can be found in the `data` folder.
+
+
 Quick start
 ---
+Clone the repo using `git clone REPO`. 
 
 ```r
-library(qpcR)
-
-# import data
-# setwd() first
+devtools::load_all(PATH/TO/REPO)
 qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
 
-# set primer efficiency
-eff <- c("HKG" = 77.5, "gene1" = 79.8)
-
 # get mean relative expression
-print("######## Example ########")
-print(qpcR(qpcRdata, hkg = c("HKG"), efficiency = eff))
+qpcR(qpcRdata, hkg = c("HKG"))
 ```
