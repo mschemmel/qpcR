@@ -4,6 +4,7 @@
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, groups) {
+    if (is.null(groups)) return(list(df))
     return(split(df, as.list(df[groups]), drop = TRUE))
 }
 
