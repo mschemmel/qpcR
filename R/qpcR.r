@@ -7,10 +7,9 @@ qenv <- new.env()
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
-qpcR <- function(df, hkg = NULL, cmp = NULL, efficiency = NULL, reference = "control", groups = NULL) {
+qpcR <- function(df, hkg = NULL, efficiency = NULL, reference = "control", groups = NULL) {
     assign("control_group", reference, qenv)
     assign("groups", groups, qenv)
-    assign("compare", cmp, qenv)
     prep_data <- prepare(df)
     requested_groups <- make_groups(prep_data, groups)
     data_clean <- cleanup(requested_groups, hkg)
