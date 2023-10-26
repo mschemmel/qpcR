@@ -35,6 +35,15 @@ set_efficiency <- function(genes, efficiency, default = 100) {
 #' @param df data frame of provided genes
 #' @examples
 #' get_control_group(df)
-get_control_group <- function(df) {
+get_reference_group <- function(df) {
     return(df[df$treatment == get("control_group", qenv), ])
+}
+
+#' drop columns based on character vector
+#' @param df input data frame
+#' @param cols character vector of columns to drop
+#' @examples
+#' drop_columns(df, cols)
+drop_columns <- function(df, cols) {
+    return(df[, -which(names(df) %in% cols)])
 }

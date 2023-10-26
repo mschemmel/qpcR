@@ -18,7 +18,7 @@ cleanup <- function(list_of_groups, hkg_) {
         gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
         lapply(setdiff(unique(gr$gene), hkg_), function(x) {
             pair_comp <- gr[gr$gene %in% c(x, hkg_), ]
-            subset(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], select = -c(brep, trep, id))
+            drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
         })
     }), recursive = FALSE)
 }
@@ -28,7 +28,7 @@ cleanup <- function(list_of_groups, hkg_) {
 #' @examples
 #' control_mean(df)
 control_mean <- function(df) {
-    contr <- get_control_group(df)
+    contr <- get_reference_group(df)
     return(tapply(contr$cq, contr$gene, mean))
 }
 
@@ -57,8 +57,8 @@ ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
     target <- setdiff(names(e_val), hkg)
     cpratio <- df[c("treatment", "gene", get("groups", qenv))]
     cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg]]^d_cq[[hkg]]
-    cpratio$rexpr <- as.numeric(cpratio$cmp / mean(get_control_group(cpratio)$cmp))
-    return(cpratio[cpratio$gene != hkg, ][, -which(names(cpratio) %in% c("cmp"))])
+    cpratio$rexpr <- as.numeric(cpratio$cmp / mean(get_reference_group(cpratio)$cmp))
+    return(drop_columns(cpratio[cpratio$gene != hkg, ], "cmp"))
 }
 
 #' calculate mean relative expression
