@@ -38,11 +38,9 @@ control_mean <- function(df) {
 #' @examples
 #' delta_cq(df, contr_mean)
 delta_cq <- function(df, contr_mean) {
-    dcq <- lapply(seq_along(contr_mean), function(x) {
+    return(setNames(lapply(seq_along(contr_mean), function(x) {
         contr_mean[x] - df[df$gene == names(contr_mean)[x], ]$cq
-    })
-    names(dcq) <- names(contr_mean)
-    return(dcq)
+    }), names(contr_mean)))
 }
 
 #' calculate the ratio compared to the mean ratio per gene
@@ -77,8 +75,7 @@ mean_relative_expression <- function(df) {
 #' pair_wise(data_list, e_values, hkg)
 pair_wise <- function(data_list, e_values, hkg) {
     return(lapply(data_list, function(x) {
-                cmean <- control_mean(x)
-                dcq <- delta_cq(x, cmean)
-                ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
+        dcq <- delta_cq(x, control_mean(x))
+        ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
     }))
 }
