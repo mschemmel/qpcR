@@ -29,3 +29,10 @@ qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
 # get mean relative expression
 qpcR(qpcRdata, hkg = c("HKG"))
 ```
+
+Testing your changes
+---
+In order to run all tests, please run:
+```
+testthat::test_dir("tests/testthat")
+```

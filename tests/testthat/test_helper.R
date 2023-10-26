@@ -7,3 +7,10 @@ test_that("get_e() works", {
     expect_equal(get_e(100), 2)
     expect_equal(get_e(0), 1)
 })
+
+test_that("drop_columns() works", {
+    dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
+    expect_equal(names(drop_columns(dat)), c("gene", "treatment", "cq", "brep", "trep"))
+    expect_equal(names(drop_columns(dat, "treatment")), c("gene", "cq", "brep", "trep"))
+    expect_equal(names(drop_columns(dat, c("treatment", "gene"))), c("cq", "brep", "trep"))
+})
