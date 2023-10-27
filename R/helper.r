@@ -36,7 +36,7 @@ set_efficiency <- function(genes, efficiency, default = 100) {
 #' @examples
 #' get_control_group(df)
 get_reference_group <- function(df) {
-    return(df[df$treatment == get("control_group", qenv), ])
+    return(df[df$treatment == get("reference_group", qenv), ])
 }
 
 #' drop columns based on character vector

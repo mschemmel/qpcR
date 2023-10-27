@@ -73,9 +73,10 @@ mean_relative_expression <- function(df) {
 #' @param hkg character vector of housekeeping genes
 #' @examples
 #' pair_wise(data_list, e_values, hkg)
-pair_wise <- function(data_list, e_values, hkg) {
+pair_wise <- function(data_list, hkg) {
     return(lapply(data_list, function(x) {
         dcq <- delta_cq(x, control_mean(x))
+        e_values <- unlist(lapply(set_efficiency(unique(x$gene), lapply(split(x$efficiency, x$gene), unique)), get_e))
         ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
     }))
 }
