@@ -16,8 +16,6 @@ get_e <- function(efficiency_of_standard) {
     return((efficiency_of_standard * 0.01) + 1)
 }
 
-
-
 #' Select control group of data
 #' @param df data frame of provided genes
 #' @examples
