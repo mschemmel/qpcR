@@ -1,6 +1,6 @@
 qenv <- new.env()
 
-#' main function to perform calculation of relative expression of qpcr data
+#' Main function to perform calculation of relative expression of qpcr data
 #' @param df data frame of qpcr data
 #' @param hkg character vector of housekeeping genes
 #' @param efficiency named list of efficiency values

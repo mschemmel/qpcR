@@ -1,3 +1,19 @@
+#' Set efficiency of genes
+#' @param genes character vector of gene names
+#' @param efficiency named list of percentual efficiency of genes
+#' @param default efficiency if not specified
+#' @examples
+#' set_efficiency(c("gene1", "gene2"), list("gene1" = 98, "gene2" = 95))
+set_efficiency <- function(genes, efficiency, default = 100) {
+    no_known_efficiency <- setdiff(genes, names(efficiency))
+    default_efficiencies <- NULL
+    if (!identical(no_known_efficiency, character(0))) {
+        default_efficiencies <- rep(default, length(setdiff(genes, names(efficiency))))
+        names(default_efficiencies) <- no_known_efficiency
+    }
+    return(c(efficiency, default_efficiencies))
+}
+
 #' Create chunks of groups for calculation
 #' @param df data frame of expression data
 #' @param groups character vector of requested groups to compare
@@ -23,7 +39,7 @@ cleanup <- function(list_of_groups, hkg_) {
     }), recursive = FALSE)
 }
 
-#' get mean expression values of all control groups
+#' Get mean expression values of all control groups
 #' @param df clean data frame of expression data
 #' @examples
 #' control_mean(df)
@@ -32,7 +48,7 @@ control_mean <- function(df) {
     return(tapply(contr$cq, contr$gene, mean))
 }
 
-#' calculate delta cq values per comparison
+#' Calculate delta cq values per comparison
 #' @param df clean data frame of expression data
 #' @param contr_mean object of control_mean function
 #' @examples
@@ -43,7 +59,7 @@ delta_cq <- function(df, contr_mean) {
     }), names(contr_mean)))
 }
 
-#' calculate the ratio compared to the mean ratio per gene
+#' Calculate the ratio compared to the mean ratio per gene
 #' @param df data frame of requested groups
 #' @param d_cq object of delta_cq
 #' @param e_val named list of efficiency values
@@ -59,7 +75,7 @@ ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
     return(drop_columns(cpratio[cpratio$gene != hkg, ], "cmp"))
 }
 
-#' calculate mean relative expression
+#' Calculate mean relative expression
 #' @param df data frame of treatment and corresponding ratio values
 #' @examples
 #' mean_relative_expression(df)
@@ -67,7 +83,7 @@ mean_relative_expression <- function(df) {
     return(tapply(df$rbyr, df$treatment, FUN = mean))
 }
 
-#' apply calculation for every hkg vs. target pair
+#' Apply calculation for every hkg vs. target pair
 #' @param data_list named list of pairs (data)
 #' @param e_values E value pair of requested comparison
 #' @param hkg character vector of housekeeping genes
