@@ -1,73 +1,145 @@
-gene	treatment	cq	brep	trep	efficiency
-gene1	control	28.22151559	1	1	78
-gene1	control	27.94116554	1	2	78
-gene1	control	28.44594261	2	1	78
-gene1	control	27.31387679	2	2	78
-gene1	control	28.31188887	3	1	78
-gene1	control	28.73013566	3	2	78
-gene1	infected	27.23655173	1	1	78
-gene1	infected	27.42391641	1	2	78
-gene1	infected	28.7047988	2	1	78
-gene1	infected	28.189015	2	2	78
-gene1	infected	NA	3	1	78
-gene1	infected	29.09058204	3	2	78
-gene1	inoculated	26.33655173	1	1	78
-gene1	inoculated	26.52391641	1	2	78
-gene1	inoculated	28.7047988	2	1	78
-gene1	inoculated	28.1890154	2	2	78
-gene1	inoculated	27.2348774	3	1	78
-gene1	inoculated	29.09058204	3	2	78
-gene2	control	23.65018612	1	1	95
-gene2	control	21.85135135	1	2	95
-gene2	control	NA	2	1	95
-gene2	control	25.11979053	2	2	95
-gene2	control	23.08728714	3	1	95
-gene2	control	22.11951632	3	2	95
-gene2	infected	21.99385646	1	1	95
-gene2	infected	21.54715011	1	2	95
-gene2	infected	21.85655321	2	1	95
-gene2	infected	21.25721349	2	2	95
-gene2	infected	20.27715803	3	1	95
-gene2	infected	21.61626721	3	2	95
-gene2	inoculated	26.33655173	1	1	95
-gene2	inoculated	25.76334641	1	2	95
-gene2	inoculated	28.7047988	2	1	95
-gene2	inoculated	27.1390154	2	2	95
-gene2	inoculated	27.2348774	3	1	95
-gene2	inoculated	29.09058204	3	2	95
-gene3	control	22.64356706	1	1	99
-gene3	control	22.16020053	1	2	99
-gene3	control	21.89800119	2	1	99
-gene3	control	21.87312935	2	2	99
-gene3	control	21.91907661	3	1	99
-gene3	control	22.89064618	3	2	99
-gene3	infected	27.26314064	1	1	99
-gene3	infected	25.66259351	1	2	99
-gene3	infected	27.98189388	2	1	99
-gene3	infected	26.04785671	2	2	99
-gene3	infected	27.80856265	3	1	99
-gene3	infected	26.22175877	3	2	99
-gene3	inoculated	27.26314064	1	1	99
-gene3	inoculated	26.87259351	1	2	99
-gene3	inoculated	27.98189388	2	1	99
-gene3	inoculated	26.04785671	2	2	99
-gene3	inoculated	27.80856265	3	1	99
-gene3	inoculated	27.26475877	3	2	99
-HKG	control	28.82764957	1	1	93
-HKG	control	NA	1	2	93
-HKG	control	26.75908916	2	1	93
-HKG	control	26.07174516	2	2	93
-HKG	control	27.90015117	3	1	93
-HKG	control	26.37993818	3	2	93
-HKG	infected	27.94681298	1	1	93
-HKG	infected	28.00461465	1	2	93
-HKG	infected	28.52737396	2	1	93
-HKG	infected	27.03622728	2	2	93
-HKG	infected	28.41094706	3	1	93
-HKG	infected	28.40119786	3	2	93
-HKG	inoculated	26.94381298	1	1	93
-HKG	inoculated	28.90461465	1	2	93
-HKG	inoculated	27.55437396	2	1	93
-HKG	inoculated	27.02422728	2	2	93
-HKG	inoculated	27.41234706	3	1	93
-HKG	inoculated	28.00111786	3	2	93
+gene	treatment	cq	brep	trep	efficiency	dpi
+gene1	control	28.22151559	1	1	78	0
+gene1	control	27.94116554	1	2	78	0
+gene1	control	28.44594261	2	1	78	0
+gene1	control	27.31387679	2	2	78	0
+gene1	control	28.31188887	3	1	78	0
+gene1	control	28.73013566	3	2	78	0
+gene1	infected	27.23655173	1	1	78	0
+gene1	infected	27.42391641	1	2	78	0
+gene1	infected	28.7047988	2	1	78	0
+gene1	infected	28.189015	2	2	78	0
+gene1	infected	NA	3	1	78	0
+gene1	infected	29.09058204	3	2	78	0
+gene1	inoculated	26.33655173	1	1	78	0
+gene1	inoculated	26.52391641	1	2	78	0
+gene1	inoculated	28.7047988	2	1	78	0
+gene1	inoculated	28.1890154	2	2	78	0
+gene1	inoculated	27.2348774	3	1	78	0
+gene1	inoculated	29.09058204	3	2	78	0
+gene2	control	23.65018612	1	1	95	0
+gene2	control	21.85135135	1	2	95	0
+gene2	control	NA	2	1	95	0
+gene2	control	25.11979053	2	2	95	0
+gene2	control	23.08728714	3	1	95	0
+gene2	control	22.11951632	3	2	95	0
+gene2	infected	21.99385646	1	1	95	0
+gene2	infected	21.54715011	1	2	95	0
+gene2	infected	21.85655321	2	1	95	0
+gene2	infected	21.25721349	2	2	95	0
+gene2	infected	20.27715803	3	1	95	0
+gene2	infected	21.61626721	3	2	95	0
+gene2	inoculated	26.33655173	1	1	95	0
+gene2	inoculated	25.76334641	1	2	95	0
+gene2	inoculated	28.7047988	2	1	95	0
+gene2	inoculated	27.1390154	2	2	95	0
+gene2	inoculated	27.2348774	3	1	95	0
+gene2	inoculated	29.09058204	3	2	95	0
+gene3	control	22.64356706	1	1	99	0
+gene3	control	22.16020053	1	2	99	0
+gene3	control	21.89800119	2	1	99	0
+gene3	control	21.87312935	2	2	99	0
+gene3	control	21.91907661	3	1	99	0
+gene3	control	22.89064618	3	2	99	0
+gene3	infected	27.26314064	1	1	99	0
+gene3	infected	25.66259351	1	2	99	0
+gene3	infected	27.98189388	2	1	99	0
+gene3	infected	26.04785671	2	2	99	0
+gene3	infected	27.80856265	3	1	99	0
+gene3	infected	26.22175877	3	2	99	0
+gene3	inoculated	27.26314064	1	1	99	0
+gene3	inoculated	26.87259351	1	2	99	0
+gene3	inoculated	27.98189388	2	1	99	0
+gene3	inoculated	26.04785671	2	2	99	0
+gene3	inoculated	27.80856265	3	1	99	0
+gene3	inoculated	27.26475877	3	2	99	0
+HKG	control	28.82764957	1	1	93	0
+HKG	control	NA	1	2	93	0
+HKG	control	26.75908916	2	1	93	0
+HKG	control	26.07174516	2	2	93	0
+HKG	control	27.90015117	3	1	93	0
+HKG	control	26.37993818	3	2	93	0
+HKG	infected	27.94681298	1	1	93	0
+HKG	infected	28.00461465	1	2	93	0
+HKG	infected	28.52737396	2	1	93	0
+HKG	infected	27.03622728	2	2	93	0
+HKG	infected	28.41094706	3	1	93	0
+HKG	infected	28.40119786	3	2	93	0
+HKG	inoculated	26.94381298	1	1	93	0
+HKG	inoculated	28.90461465	1	2	93	0
+HKG	inoculated	27.55437396	2	1	93	0
+HKG	inoculated	27.02422728	2	2	93	0
+HKG	inoculated	27.41234706	3	1	93	0
+HKG	inoculated	28.00111786	3	2	93	0
+gene1	control	26.33655173	1	1	78	3
+gene1	control	21.89800119	1	2	78	3
+gene1	control	26.87259351	2	1	78	3
+gene1	control	26.75908916	2	2	78	3
+gene1	control	NA	3	1	78	3
+gene1	control	21.99385646	3	2	78	3
+gene1	infected	28.7047988	1	1	78	3
+gene1	infected	28.7047988	1	2	78	3
+gene1	infected	27.26314064	2	1	78	3
+gene1	infected	27.80856265	2	2	78	3
+gene1	infected	26.22175877	3	1	78	3
+gene1	infected	27.2348774	3	2	78	3
+gene1	inoculated	NA	1	1	78	3
+gene1	inoculated	28.00461465	1	2	78	3
+gene1	inoculated	28.90461465	2	1	78	3
+gene1	inoculated	25.11979053	2	2	78	3
+gene1	inoculated	28.73013566	3	1	78	3
+gene1	inoculated	28.40119786	3	2	78	3
+gene2	control	26.07174516	1	1	95	3
+gene2	control	27.02422728	1	2	95	3
+gene2	control	22.64356706	2	1	95	3
+gene2	control	26.52391641	2	2	95	3
+gene2	control	27.42391641	3	1	95	3
+gene2	control	29.09058204	3	2	95	3
+gene2	infected	26.04785671	1	1	95	3
+gene2	infected	22.11951632	1	2	95	3
+gene2	infected	26.37993818	2	1	95	3
+gene2	infected	26.33655173	2	2	95	3
+gene2	infected	21.61626721	3	1	95	3
+gene2	infected	27.31387679	3	2	95	3
+gene2	inoculated	27.1390154	1	1	95	3
+gene2	inoculated	21.54715011	1	2	95	3
+gene2	inoculated	21.85135135	2	1	95	3
+gene2	inoculated	21.91907661	2	2	95	3
+gene2	inoculated	20.27715803	3	1	95	3
+gene2	inoculated	23.08728714	3	2	95	3
+gene3	control	28.22151559	1	1	99	3
+gene3	control	27.90015117	1	2	99	3
+gene3	control	28.44594261	2	1	99	3
+gene3	control	29.09058204	2	2	99	3
+gene3	control	28.00111786	3	1	99	3
+gene3	control	25.66259351	3	2	99	3
+gene3	infected	22.16020053	1	1	99	3
+gene3	infected	28.7047988	1	2	99	3
+gene3	infected	25.76334641	2	1	99	3
+gene3	infected	21.87312935	2	2	99	3
+gene3	infected	28.82764957	3	1	99	3
+gene3	infected	27.26475877	3	2	99	3
+gene3	inoculated	27.98189388	1	1	99	3
+gene3	inoculated	28.189015	1	2	99	3
+gene3	inoculated	27.98189388	2	1	99	3
+gene3	inoculated	26.94381298	2	2	99	3
+gene3	inoculated	29.09058204	3	1	99	3
+gene3	inoculated	26.04785671	3	2	99	3
+HKG	control	28.52737396	1	1	93	3
+HKG	control	27.41234706	1	2	93	3
+HKG	control	27.55437396	2	1	93	3
+HKG	control	27.80856265	2	2	93	3
+HKG	control	23.65018612	3	1	93	3
+HKG	control	28.41094706	3	2	93	3
+HKG	infected	NA	1	1	93	3
+HKG	infected	27.26314064	1	2	93	3
+HKG	infected	21.85655321	2	1	93	3
+HKG	infected	28.31188887	2	2	93	3
+HKG	infected	27.94681298	3	1	93	3
+HKG	infected	21.25721349	3	2	93	3
+HKG	inoculated	27.94116554	1	1	93	3
+HKG	inoculated	28.1890154	1	2	93	3
+HKG	inoculated	27.23655173	2	1	93	3
+HKG	inoculated	27.2348774	2	2	93	3
+HKG	inoculated	22.89064618	3	1	93	3
+HKG	inoculated	27.03622728	3	2	93	3
