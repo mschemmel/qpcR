@@ -1,7 +1,7 @@
 #' Set efficiency of genes
 #' @param genes character vector of gene names
 #' @param efficiency named list of percentual efficiency of genes
-#' @param default efficiency if not specified
+#' @param default efficiency if not specified (default: 100)
 #' @examples
 #' set_efficiency(c("gene1", "gene2"), list("gene1" = 98, "gene2" = 95))
 set_efficiency <- function(genes, efficiency, default = 100) {
@@ -64,7 +64,6 @@ delta_cq <- function(df, contr_mean) {
 #' @param d_cq object of delta_cq
 #' @param e_val named list of efficiency values
 #' @param hkg_ character vector of housekeeping genes
-#' @param treatm character vector of treatments
 #' @examples
 #' ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
