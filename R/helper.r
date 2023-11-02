@@ -33,3 +33,11 @@ drop_columns <- function(df, cols = NULL) {
     if (is.null(cols)) return(df)
     return(df[, -which(names(df) %in% cols)])
 }
+
+#' Calculate geometric mean if multiple housekeeping genes are given
+#' @param values vector of numeric values
+#' @examples
+#' geometric_mean(c(0.23,0.53,0.12))
+geometric_mean <- function(values) {
+    return(exp(mean(log(values))))
+}

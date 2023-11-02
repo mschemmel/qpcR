@@ -27,7 +27,7 @@ devtools::load_all(PATH/TO/REPO)
 qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
 
 # get mean relative expression
-qpcR(qpcRdata, hkg = c("HKG"))
+qpcR(qpcRdata, hkg = c("HKG"), groups = "dpi")
 ```
 
 Testing your changes
