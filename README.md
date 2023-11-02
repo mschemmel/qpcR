@@ -14,6 +14,7 @@ The minimal structure of the input data has to contain following information: `g
 | cq | cq value measured by qPCR machine |
 | brep | number of biological replication |
 | trep | number of technical replication |
+| efficiency | primer efficiency values |
 
 An example dataset can be found in the `data` folder.
 
