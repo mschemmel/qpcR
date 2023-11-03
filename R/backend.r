@@ -28,8 +28,8 @@ make_groups <- function(df, groups) {
 #' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
 #' @param hkg_ character string of provided housekeeping genes
 #' @examples
-#' cleanup(list_of_groups, khg_ = c("HKG"))
-cleanup <- function(list_of_groups, hkg_) {
+#' sanitize(list_of_groups, khg_ = c("HKG"))
+sanitize <- function(list_of_groups, hkg_) {
     unlist(lapply(list_of_groups, function(gr) {
         gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
         lapply(setdiff(unique(gr$gene), hkg_), function(x) {
