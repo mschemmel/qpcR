@@ -39,5 +39,5 @@ drop_columns <- function(df, cols = NULL) {
 #' @examples
 #' geometric_mean(c(0.23,0.53,0.12))
 geometric_mean <- function(values) {
-    return(exp(mean(log(values))))
+    return(exp(mean(log(na.omit(values)))))
 }

@@ -14,3 +14,8 @@ test_that("drop_columns() works", {
     expect_equal(names(drop_columns(dat, "treatment")), c("gene", "cq", "brep", "trep"))
     expect_equal(names(drop_columns(dat, c("treatment", "gene"))), c("cq", "brep", "trep"))
 })
+
+test_that("geometric_mean() works", {
+	expect_equal(geometric_mean(c(1:3)), 1.8171206)
+	expect_equal(geometric_mean(c(1:3, NA)), 1.8171206)
+})
