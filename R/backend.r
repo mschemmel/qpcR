@@ -16,7 +16,7 @@ make_groups <- function(df, groups) {
 sanitize <- function(list_of_groups, hkg_) {
     unlist(lapply(list_of_groups, function(gr) {
         gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
-        lapply(setdiff(unique(gr$gene), hkg_), function(x) {
+        lapply(setdiff(gr$gene, hkg_), function(x) {
             pair_comp <- gr[gr$gene %in% c(x, hkg_), ]
             drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
         })
