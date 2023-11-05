@@ -1,19 +1,3 @@
-#' Set efficiency of genes
-#' @param genes character vector of gene names
-#' @param efficiency named list of percentual efficiency of genes
-#' @param default efficiency if not specified (default: 100)
-#' @examples
-#' set_efficiency(c("gene1", "gene2"), list("gene1" = 98, "gene2" = 95))
-set_efficiency <- function(genes, efficiency, default = 100) {
-    no_known_efficiency <- setdiff(genes, names(efficiency))
-    default_efficiencies <- NULL
-    if (!identical(no_known_efficiency, character(0))) {
-        default_efficiencies <- rep(default, length(setdiff(genes, names(efficiency))))
-        names(default_efficiencies) <- no_known_efficiency
-    }
-    return(c(efficiency, default_efficiencies))
-}
-
 #' Create chunks of groups for calculation
 #' @param df data frame of expression data
 #' @param groups character vector of requested groups to compare
@@ -54,24 +38,25 @@ control_mean <- function(df) {
 #' @examples
 #' delta_cq(df, contr_mean)
 delta_cq <- function(df, contr_mean) {
-    return(setNames(lapply(seq_along(contr_mean), function(x) {
-        contr_mean[x] - df[df$gene == names(contr_mean)[x], ]$cq
-    }), names(contr_mean)))
+    df$control_mean <- contr_mean[match(df$gene, names(contr_mean))]
+    df$delta_cq <- df$control_mean - df$cq
+    return(df)
 }
 
 #' Calculate the ratio compared to the mean ratio per gene
 #' @param df data frame of requested groups
-#' @param d_cq object of delta_cq
-#' @param e_val named list of efficiency values
 #' @param hkg character vector of housekeeping genes
 #' @examples
 #' ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
-ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
-    target <- setdiff(names(e_val), hkg)
-    cpratio <- df[c("treatment", "gene", get("groups", qenv))]
-    cpratio$cmp <- e_val[[target]]^d_cq[[target]] / e_val[[hkg]]^d_cq[[hkg]]
-    cpratio$rexpr <- as.numeric(cpratio$cmp / mean(get_reference_group(cpratio)$cmp))
-    return(drop_columns(cpratio[cpratio$gene != hkg, ], "cmp"))
+ratio_by_mean_ratio <- function(df, hkg) {
+    cmean <- control_mean(df)
+    df <- delta_cq(df, cmean)
+    df$E <- get_e(df$eff)
+    target_df <- df[df$gene == setdiff(df$gene, hkg), ]
+    hkg_df <- df[df$gene == hkg, ]
+    target_df$cmp <- (target_df$E^target_df$delta_cq) / (hkg_df$E^hkg_df$delta_cq)
+    target_df$rexpr <- as.numeric(target_df$cmp / mean(get_reference_group(target_df)$cmp))
+    return(drop_columns(target_df, c("control_mean", "delta_cq", "cmp")))
 }
 
 #' Calculate mean relative expression
@@ -89,8 +74,6 @@ mean_relative_expression <- function(df) {
 #' pair_wise(pair, e_values, hkg)
 pair_wise <- function(pair, hkg) {
     return(lapply(pair, function(x) {
-        dcq <- delta_cq(x, control_mean(x))
-        e_values <- unlist(lapply(set_efficiency(unique(x$gene), lapply(split(x$efficiency, x$gene), unique)), get_e))
-        ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
+        ratio_by_mean_ratio(x, hkg)
     }))
 }
