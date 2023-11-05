@@ -2,20 +2,18 @@
 % Please edit documentation in R/backend.r
 \name{pair_wise}
 \alias{pair_wise}
-\title{apply calculation for every hkg vs. target pair}
+\title{Apply calculation for every hkg vs. target pair}
 \usage{
-pair_wise(data_list, e_values, hkg)
+pair_wise(pair, hkg)
 }
 \arguments{
-\item{data_list}{named list of pairs (data)}
-
-\item{e_values}{E value pair of requested comparison}
+\item{pair}{named list of pairs (data)}
 
 \item{hkg}{character vector of housekeeping genes}
 }
 \description{
-apply calculation for every hkg vs. target pair
+Apply calculation for every hkg vs. target pair
 }
 \examples{
-pair_wise(data_list, e_values, hkg)
+pair_wise(pair, e_values, hkg)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{prepare}
 \alias{prepare}
-\title{prepare input data}
+\title{Prepare input data}
 \usage{
 prepare(df)
 }
@@ -10,7 +10,7 @@ prepare(df)
 \item{df}{input data.frame of qPCR data}
 }
 \description{
-prepare input data
+Prepare input data
 }
 \examples{
 prepare(df)

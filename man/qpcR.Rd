@@ -2,9 +2,9 @@
 % Please edit documentation in R/qpcR.r
 \name{qpcR}
 \alias{qpcR}
-\title{main function to perform calculation of mean relative expression of qpcr data}
+\title{Main function to perform calculation of relative expression of qpcr data}
 \usage{
-qpcR(df, hkg = NULL, efficiency = NULL)
+qpcR(df, hkg = NULL, reference = "control", groups = NULL)
 }
 \arguments{
 \item{df}{data frame of qpcr data}
@@ -14,7 +14,7 @@ qpcR(df, hkg = NULL, efficiency = NULL)
 \item{efficiency}{named list of efficiency values}
 }
 \description{
-main function to perform calculation of mean relative expression of qpcr data
+Main function to perform calculation of relative expression of qpcr data
 }
 \examples{
 qpcr(df, hkg = c("HKG"))

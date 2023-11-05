@@ -5,6 +5,7 @@
 prepare <- function(df) {
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
+    df$E <- get_e(df$eff)
     return(df)
 }
 

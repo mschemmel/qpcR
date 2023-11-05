@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.r
 \name{get_e}
 \alias{get_e}
-\title{calculate E value of standard samples}
+\title{Calculate E value of standard samples}
 \usage{
 get_e(efficiency_of_standard)
 }
@@ -10,7 +10,7 @@ get_e(efficiency_of_standard)
 \item{efficiency_of_standard}{efficiency values in percent (list, 0-100)}
 }
 \description{
-calculate E value of standard samples
+Calculate E value of standard samples
 }
 \examples{
 get_e(named_list)

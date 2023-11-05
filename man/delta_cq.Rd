@@ -2,9 +2,9 @@
 % Please edit documentation in R/backend.r
 \name{delta_cq}
 \alias{delta_cq}
-\title{calculate delta cq values per comparison}
+\title{Calculate delta cq values per comparison}
 \usage{
-delta_cq(df, contr_mean)
+delta_cq(df)
 }
 \arguments{
 \item{df}{clean data frame of expression data}
@@ -12,7 +12,7 @@ delta_cq(df, contr_mean)
 \item{contr_mean}{object of control_mean function}
 }
 \description{
-calculate delta cq values per comparison
+Calculate delta cq values per comparison
 }
 \examples{
 delta_cq(df, contr_mean)

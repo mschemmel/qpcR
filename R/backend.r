@@ -23,23 +23,16 @@ sanitize <- function(list_of_groups, hkg_) {
     }), recursive = FALSE)
 }
 
-#' Get mean expression values of all control groups
-#' @param df clean data frame of expression data
-#' @examples
-#' control_mean(df)
-control_mean <- function(df) {
-    contr <- get_reference_group(df)
-    return(tapply(contr$cq, contr$gene, mean))
-}
-
 #' Calculate delta cq values per comparison
 #' @param df clean data frame of expression data
 #' @param contr_mean object of control_mean function
 #' @examples
 #' delta_cq(df, contr_mean)
-delta_cq <- function(df, contr_mean) {
-    df$control_mean <- contr_mean[match(df$gene, names(contr_mean))]
-    df$delta_cq <- df$control_mean - df$cq
+delta_cq <- function(df) {
+    ref <- get_reference_group(df)
+    ref_mean <- tapply(ref$cq, ref$gene, mean)
+    df$ref_mean <- ref_mean[match(df$gene, names(ref_mean))]
+    df$delta_cq <- df$ref_mean - df$cq
     return(df)
 }
 
@@ -49,22 +42,12 @@ delta_cq <- function(df, contr_mean) {
 #' @examples
 #' ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 ratio_by_mean_ratio <- function(df, hkg) {
-    cmean <- control_mean(df)
-    df <- delta_cq(df, cmean)
-    df$E <- get_e(df$eff)
+    df <- delta_cq(df)
     target_df <- df[df$gene == setdiff(df$gene, hkg), ]
     hkg_df <- df[df$gene == hkg, ]
     target_df$cmp <- (target_df$E^target_df$delta_cq) / (hkg_df$E^hkg_df$delta_cq)
     target_df$rexpr <- as.numeric(target_df$cmp / mean(get_reference_group(target_df)$cmp))
     return(drop_columns(target_df, c("control_mean", "delta_cq", "cmp")))
-}
-
-#' Calculate mean relative expression
-#' @param df data frame of treatment and corresponding ratio values
-#' @examples
-#' mean_relative_expression(df)
-mean_relative_expression <- function(df) {
-    return(tapply(df$rbyr, df$treatment, FUN = mean))
 }
 
 #' Apply calculation for every hkg vs. target pair

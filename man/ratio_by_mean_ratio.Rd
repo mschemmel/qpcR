@@ -2,22 +2,18 @@
 % Please edit documentation in R/backend.r
 \name{ratio_by_mean_ratio}
 \alias{ratio_by_mean_ratio}
-\title{calculate the ratio compared to the mean ratio per gene}
+\title{Calculate the ratio compared to the mean ratio per gene}
 \usage{
-ratio_by_mean_ratio(d_cq, e_val, hkg_, treatm)
+ratio_by_mean_ratio(df, hkg)
 }
 \arguments{
-\item{d_cq}{object of delta_cq}
+\item{df}{data frame of requested groups}
 
-\item{e_val}{named list of efficiency values}
-
-\item{hkg_}{character vector of housekeeping genes}
-
-\item{treatm}{character vector of treatments}
+\item{hkg}{character vector of housekeeping genes}
 }
 \description{
-calculate the ratio compared to the mean ratio per gene
+Calculate the ratio compared to the mean ratio per gene
 }
 \examples{
-ratio_by_mean_ratio(d_cq, e_val, hkg_, treatm)
+ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 }
