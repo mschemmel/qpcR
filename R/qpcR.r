@@ -12,7 +12,7 @@ qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL) {
     assign("groups", groups, qenv)
     prep_data <- prepare(df)
     requested_groups <- make_groups(prep_data, groups)
-    data_clean <- sanitize(requested_groups, hkg)
-    rel_expr <- pair_wise(data_clean, hkg)
+    clean_pairs <- sanitize(requested_groups, hkg)
+    rel_expr <- pair_wise(clean_pairs, hkg)
     return(do.call("rbind", unname(rel_expr)))
 }

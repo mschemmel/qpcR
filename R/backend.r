@@ -63,7 +63,7 @@ delta_cq <- function(df, contr_mean) {
 #' @param df data frame of requested groups
 #' @param d_cq object of delta_cq
 #' @param e_val named list of efficiency values
-#' @param hkg_ character vector of housekeeping genes
+#' @param hkg character vector of housekeeping genes
 #' @examples
 #' ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 ratio_by_mean_ratio <- function(df, d_cq, e_val, hkg) {
@@ -83,13 +83,12 @@ mean_relative_expression <- function(df) {
 }
 
 #' Apply calculation for every hkg vs. target pair
-#' @param data_list named list of pairs (data)
-#' @param e_values E value pair of requested comparison
+#' @param pair named list of pairs (data)
 #' @param hkg character vector of housekeeping genes
 #' @examples
-#' pair_wise(data_list, e_values, hkg)
-pair_wise <- function(data_list, hkg) {
-    return(lapply(data_list, function(x) {
+#' pair_wise(pair, e_values, hkg)
+pair_wise <- function(pair, hkg) {
+    return(lapply(pair, function(x) {
         dcq <- delta_cq(x, control_mean(x))
         e_values <- unlist(lapply(set_efficiency(unique(x$gene), lapply(split(x$efficiency, x$gene), unique)), get_e))
         ratio_by_mean_ratio(x, dcq, e_val = e_values[names(dcq)], hkg)
