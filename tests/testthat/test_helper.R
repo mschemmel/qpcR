@@ -5,9 +5,9 @@ test_that("get_e() works", {
 
 test_that("drop_columns() works", {
     dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
-    expect_equal(names(drop_columns(dat)), c("gene", "treatment", "cq", "brep", "trep"))
-    expect_equal(names(drop_columns(dat, "treatment")), c("gene", "cq", "brep", "trep"))
-    expect_equal(names(drop_columns(dat, c("treatment", "gene"))), c("cq", "brep", "trep"))
+    expect_equal(names(drop_columns(dat)), c("gene", "treatment", "cq", "brep", "trep", "efficiency", "dpi"))
+    expect_equal(names(drop_columns(dat, "treatment")), c("gene", "cq", "brep", "trep", "efficiency", "dpi"))
+    expect_equal(names(drop_columns(dat, c("treatment", "gene"))), c("cq", "brep", "trep", "efficiency", "dpi"))
 })
 
 test_that("geometric_mean() works", {

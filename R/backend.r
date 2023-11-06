@@ -3,7 +3,7 @@
 #' @param groups character vector of requested groups to compare
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
-make_groups <- function(df, groups) {
+make_groups <- function(df, groups = NULL) {
     if (is.null(groups)) return(list(df))
     return(split(df, as.list(df[groups]), drop = TRUE))
 }
@@ -24,8 +24,7 @@ sanitize <- function(list_of_groups, hkg) {
 }
 
 #' Calculate delta cq values per comparison
-#' @param df clean data frame of expression data
-#' @param contr_mean object of control_mean function
+#' @param df clean data of given group
 #' @examples
 #' delta_cq(df, contr_mean)
 delta_cq <- function(df) {
