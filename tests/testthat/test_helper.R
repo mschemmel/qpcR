@@ -12,5 +12,10 @@ test_that("drop_columns() works", {
 
 test_that("geometric_mean() works", {
     expect_equal(geometric_mean(c(1:3)), 1.8171206)
-    exect_equal(geometric_mean(c(1:3, NA)), 1.8171206)
+    expect_equal(geometric_mean(c(1:3, NA)), 1.8171206)
+})
+
+test_that("prepare() works", {
+    dat <- data.frame("gene" = rep("gene1", 3), cq = runif(3))
+    expect_equal(unique(prepare(dat)$efficiency), 100)
 })
