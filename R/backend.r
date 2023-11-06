@@ -12,12 +12,12 @@ make_groups <- function(df, groups) {
 #' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
 #' @param hkg_ character string of provided housekeeping genes
 #' @examples
-#' sanitize(list_of_groups, khg_ = c("HKG"))
-sanitize <- function(list_of_groups, hkg_) {
+#' sanitize(list_of_groups, khg = c("HKG"))
+sanitize <- function(list_of_groups, hkg) {
     unlist(lapply(list_of_groups, function(gr) {
         gr$id <- paste0(gr$treatment, gr$brep, gr$trep)
-        lapply(setdiff(gr$gene, hkg_), function(x) {
-            pair_comp <- gr[gr$gene %in% c(x, hkg_), ]
+        lapply(setdiff(gr$gene, hkg), function(x) {
+            pair_comp <- gr[gr$gene %in% c(x, hkg), ]
             drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
         })
     }), recursive = FALSE)
@@ -50,7 +50,7 @@ ratio_by_mean_ratio <- function(df, hkg) {
 
     ratio <- apply(data.frame(do.call(cbind, lapply(split(hkg_df, hkg_df$gene), function(x) x$ratio))), 1, geometric_mean)
 
-    target_df$cmp_ratio <- (target_df$ratio) / ratio
+    target_df$cmp_ratio <- target_df$ratio / ratio
     target_df$rexpr <- as.numeric(target_df$cmp_ratio / mean(get_reference_group(target_df)$cmp_ratio))
     return(drop_columns(target_df, c("control_mean", "delta_cq", "cmp_ratio")))
 }
