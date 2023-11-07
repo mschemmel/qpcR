@@ -42,7 +42,7 @@ delta_cq <- function(df) {
 #' ratio_by_mean_ratio(df, hkg)
 ratio_by_mean_ratio <- function(df, hkg) {
     df <- delta_cq(df)
-    target_df <- df[df$gene == setdiff(df$gene, hkg), ]
+    target_df <- df[!(df$gene %in% hkg), ]
     target_df$ratio <- target_df$E^target_df$delta_cq
     hkg_df <- df[df$gene %in% hkg, ]
     hkg_df$ratio <- hkg_df$E^hkg_df$delta_cq
