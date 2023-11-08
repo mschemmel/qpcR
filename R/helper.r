@@ -10,11 +10,12 @@ prepare <- function(df) {
 }
 
 #' Calculate E value of standard samples
-#' @param efficiency_of_standard efficiency values in percent (list, 0-100)
+#' @param efficiency numeric vector of efficiency values in percent (vector, 0-100)
 #' @examples
-#' get_e(named_list)
-get_e <- function(efficiency_of_standard) {
-    return((efficiency_of_standard * 0.01) + 1)
+#' get_e(c(87,67,98,78))
+get_e <- function(efficiency) {
+    efficiency[is.na(efficiency)] <- 100
+    return(as.numeric((efficiency * 0.01) + 1))
 }
 
 #' Select control group of data
