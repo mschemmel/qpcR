@@ -5,7 +5,7 @@
 prepare <- function(df) {
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
-    df$E <- get_e(df$eff)
+    df$E <- get_e(as.numeric(gsub(",", ".", df$efficiency)))
     return(df)
 }
 
@@ -15,7 +15,7 @@ prepare <- function(df) {
 #' get_e(c(87,67,98,78))
 get_e <- function(efficiency) {
     efficiency[is.na(efficiency)] <- 100
-    return(as.numeric((efficiency * 0.01) + 1))
+    return((efficiency * 0.01) + 1)
 }
 
 #' Select control group of data
