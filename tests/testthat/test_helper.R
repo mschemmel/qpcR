@@ -1,3 +1,4 @@
+dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
 test_that("get_e() works", {
     expect_equal(get_e(100), 2)
     expect_equal(get_e(0), 1)
@@ -7,7 +8,6 @@ test_that("get_e() works", {
 })
 
 test_that("drop_columns() works", {
-    dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
     expect_equal(names(drop_columns(dat)), c("gene", "treatment", "cq", "brep", "trep", "efficiency", "dpi"))
     expect_equal(names(drop_columns(dat, "treatment")), c("gene", "cq", "brep", "trep", "efficiency", "dpi"))
     expect_equal(names(drop_columns(dat, c("treatment", "gene"))), c("cq", "brep", "trep", "efficiency", "dpi"))
@@ -21,6 +21,6 @@ test_that("geometric_mean() works", {
 })
 
 test_that("prepare() works", {
-    dat <- data.frame("gene" = rep("gene1", 3), cq = runif(3))
-    expect_equal(unique(prepare(dat)$efficiency), 100)
+    expect_equal(unique(qpcR(drop_columns(dat, "efficiency"), hkg = "HKG", reference = "control", groups = "dpi")$efficiency), 100)
+    expect_error(qpcR(drop_columns(dat, "treatment"), hkg = "HKG", reference = "control", groups = "dpi")$efficiency)
 })

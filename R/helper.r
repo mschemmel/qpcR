@@ -3,6 +3,10 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
+    needed_columns <- c("treatment", "gene", "cq", "brep", "trep")
+    if (!all(needed_columns %in% colnames(df))) {
+        stop("Input has to contain at least: ", paste0(needed_columns, sep = " "), "\n")
+    }
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
     df$E <- get_e(as.numeric(gsub(",", ".", df$efficiency)))
