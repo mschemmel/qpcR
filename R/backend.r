@@ -62,3 +62,13 @@ pair_wise <- function(pair, hkg) {
         ratio_by_mean_ratio(x, hkg)
     }))
 }
+
+#' Summarize expression data
+#' @param df data frame of relative expression data
+#' @examples 
+#' conflate(df)
+conflate <- function(df, do = TRUE) {
+    if (!do) return(df)
+    formula <- paste0("rexpr ~ ", paste("treatment", "gene", get("groups", qenv), sep = "+"))
+    return(aggregate(as.formula(formula), df, mean))
+}

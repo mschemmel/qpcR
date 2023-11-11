@@ -4,7 +4,7 @@ test_that("qpcR() works", {
     control_groups <- aggregate(rexpr ~ gene + dpi, data = run, FUN = mean)
     expect_equal(unique(control_groups$rexpr), c(1, 1))
 
-    run2 <- get_reference_group(qpcR(dat, hkg = "HKG", reference = "control"))
+    run2 <- get_reference_group(qpcR(dat, hkg = "HKG", reference = "control", aggregate = FALSE))
     control_groups2 <- aggregate(rexpr ~ gene, data = run2, FUN = mean)
     expect_equal(unique(control_groups2$rexpr), c(1, 1))
 })

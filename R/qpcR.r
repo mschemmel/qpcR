@@ -8,12 +8,12 @@ qenv <- new.env()
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
-qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL) {
+qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate = TRUE) {
     assign("reference_group", reference, qenv)
     assign("groups", groups, qenv)
     prep_data <- prepare(df)
     requested_groups <- make_groups(prep_data, groups)
     clean_pairs <- sanitize(requested_groups, hkg)
-    rel_expr <- pair_wise(clean_pairs, hkg)
-    return(do.call("rbind", unname(rel_expr)))
+    rel_expr <- do.call("rbind", unname(pair_wise(clean_pairs, hkg)))
+    return(conflate(rel_expr, do = aggregate))
 }
