@@ -1,6 +1,6 @@
 #' Create chunks of groups for calculation
 #' @param df data frame of expression data
-#' @param groups character vector of requested groups to compare
+#' @param groups character vector of requested groups to compare (default: NULL)
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, groups = NULL) {
@@ -68,11 +68,12 @@ pair_wise <- function(pair, hkg) {
 
 #' Summarize expression data
 #' @param df data frame of relative expression data
-#' @examples 
+#' @param do boolean if to aggregate the input data (default: TRUE)
+#' @examples
 #' conflate(df)
 conflate <- function(df, do = TRUE) {
     if (!do) return(df)
     formula_strings <- paste0("rexpr ~ ", paste("treatment", "gene", get("groups", qenv), sep = "+"))
-    stats <- function(x) c(mexpr = mean(x), sdexpr = sd(x))
+    stats <- function(x) c(mexpr = mean(x), sdexpr = sd(x), n = length(x))
     return(aggregate(as.formula(formula_strings), df, stats))
 }
