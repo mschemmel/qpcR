@@ -5,6 +5,9 @@
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, groups = NULL) {
     if (is.null(groups)) return(list(df))
+    if (!all(groups %in% colnames(df))) {
+        stop("Not all group(s) in data provided.")
+    }
     return(split(df, as.list(df[groups]), drop = TRUE))
 }
 
