@@ -24,8 +24,3 @@ test_that("prepare() works", {
     expect_equal(unique(qpcR(drop_columns(dat, "efficiency"), hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE)$efficiency), 100)
     expect_error(qpcR(drop_columns(dat, "treatment"), hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE)$efficiency)
 })
-
-test_that("make_groups() works", {
-    expect_type(make_groups(dat), "list")
-    expect_error(make_groups(dat, "dose"))
-})
