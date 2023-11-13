@@ -38,6 +38,15 @@ delta_cq <- function(df) {
     return(df)
 }
 
+#' Calculate efficiency based ratio of delta cq value
+#' @param df data frame to add ratio column to
+#' @examples
+#' ratio(df)
+ratio <- function(df) {
+    df$ratio <- df$E^df$delta_cq
+    return(df)
+}
+
 #' Calculate the ratio compared to the mean ratio per gene
 #' @param df data frame of requested groups
 #' @param hkg character vector of housekeeping genes
@@ -45,10 +54,8 @@ delta_cq <- function(df) {
 #' ratio_by_mean_ratio(df, hkg)
 ratio_by_mean_ratio <- function(df, hkg) {
     df <- delta_cq(df)
-    target_df <- df[!(df$gene %in% hkg), ]
-    target_df$ratio <- target_df$E^target_df$delta_cq
-    hkg_df <- df[df$gene %in% hkg, ]
-    hkg_df$ratio <- hkg_df$E^hkg_df$delta_cq
+    target_df <- ratio(df[!(df$gene %in% hkg), ])
+    hkg_df <- ratio(df[df$gene %in% hkg, ])
     ratio <- apply(data.frame(do.call(cbind, lapply(split(hkg_df, hkg_df$gene), function(x) x$ratio))), 1, geometric_mean)
     target_df$cmp_ratio <- target_df$ratio / ratio
     target_df$rexpr <- as.numeric(target_df$cmp_ratio / mean(get_reference_group(target_df)$cmp_ratio))
