@@ -29,6 +29,9 @@ qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
 
 # get mean relative expression
 qpcR(qpcRdata, hkg = c("HKG"), groups = "dpi")
+
+# in order to get raw values set aggregate = FALSE
+qpcR(qpcRdata, hkg = c("HKG"), groups = "dpi", aggregate = FALSE)
 ```
 
 Testing your changes
