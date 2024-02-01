@@ -18,11 +18,15 @@ make_groups <- function(df, groups = NULL) {
 #' sanitize(list_of_groups, khg = c("HKG"))
 sanitize <- function(list_of_groups, hkg) {
     unlist(lapply(list_of_groups, function(gr) {
-        gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
-        lapply(setdiff(gr$gene, hkg), function(x) {
-            pair_comp <- gr[gr$gene %in% c(x, hkg), ]
-            drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
-        })
+        if (any(is.na(gr$cq))) {
+            gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
+            lapply(setdiff(gr$gene, hkg), function(x) {
+                pair_comp <- gr[gr$gene %in% c(x, hkg), ]
+                drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
+            })
+        } else {
+            list(gr)
+        }
     }), recursive = FALSE)
 }
 

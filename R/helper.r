@@ -3,7 +3,7 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
-    needed_columns <- c("treatment", "gene", "cq", "brep", "trep")
+    needed_columns <- c("treatment", "gene", "cq")
     if (!all(needed_columns %in% colnames(df))) {
         stop("Input has to contain at least: ", paste0(needed_columns, sep = " "), "\n")
     }
