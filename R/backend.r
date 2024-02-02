@@ -4,6 +4,8 @@
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, groups = NULL) {
+    cols <- colnames(df)
+    df[!cols == "cq"] < lapply(df[!cols == "cq"], as.character)
     if (is.null(groups)) return(list(df))
     if (!all(groups %in% colnames(df))) {
         stop("Not all group(s) in data provided.")

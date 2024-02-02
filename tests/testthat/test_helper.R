@@ -22,5 +22,4 @@ test_that("geometric_mean() works", {
 
 test_that("prepare() works", {
     expect_equal(unique(qpcR(drop_columns(dat, "efficiency"), hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE)$efficiency), 100)
-    expect_error(qpcR(drop_columns(dat, "treatment"), hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE)$efficiency)
 })

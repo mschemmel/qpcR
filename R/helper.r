@@ -3,10 +3,6 @@
 #' @examples
 #' prepare(df)
 prepare <- function(df) {
-    needed_columns <- c("treatment", "gene", "cq")
-    if (!all(needed_columns %in% colnames(df))) {
-        stop("Input has to contain at least: ", paste0(needed_columns, sep = " "), "\n")
-    }
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
     df$E <- get_e(as.numeric(gsub(",", ".", df$efficiency)))
@@ -27,7 +23,7 @@ get_e <- function(efficiency) {
 #' @examples
 #' get_control_group(df)
 get_reference_group <- function(df) {
-    return(df[df$treatment == get("reference_group", qenv), ])
+    return(df[df$treatment == base::get("reference_group", qenv), ])
 }
 
 #' Drop columns based on character vector
