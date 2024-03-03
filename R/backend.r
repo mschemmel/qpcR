@@ -87,6 +87,6 @@ pair_wise <- function(pair, hkg) {
 conflate <- function(df, do = TRUE) {
     if (!do) return(df)
     formula_string <- paste0("rexpr ~ ", paste(c("treatment", "gene", get("groups", qenv)), collapse = "+"))
-    stats <- function(x) c(mexpr = mean(x), sdexpr = sd(x), n = length(x))
-    return(aggregate(as.formula(formula_string), df, stats))
+    stats <- function(x) c("mean" = mean(x), "sd" = sd(x), "n" = length(x))
+    return(do.call(data.frame, aggregate(as.formula(formula_string), df, stats)))
 }

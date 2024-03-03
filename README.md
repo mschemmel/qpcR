@@ -9,7 +9,7 @@ The minimal structure of the input data has to contain following information: `g
 
 | Column | Description |
 |--------|-------------|
-| gene   | all investigated gene names |
+| gene | all investigated gene names |
 | treatment | variable to compare | 
 | cq | cq value measured by qPCR machine |
 | brep | number of biological replication |
