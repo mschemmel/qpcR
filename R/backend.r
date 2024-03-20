@@ -1,13 +1,16 @@
 #' Create chunks of groups for calculation
 #' @param df data frame of expression data
+#' @param hkg_ character string of provided housekeeping genes
 #' @param groups character vector of requested groups to compare (default: NULL)
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
-make_groups <- function(df, groups = NULL) {
+make_groups <- function(df, hkg, groups = NULL) {
     cols <- colnames(df)
     non_affected <- c("cq", "E", "efficiency")
     df[!(cols %in% non_affected)] <- lapply(df[!(cols %in% non_affected)], as.character)
-    if (is.null(groups)) return(list(df))
+    if (is.null(groups)) {
+        return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
+    }
     if (!all(groups %in% colnames(df))) {
         stop("Not all group(s) in data provided.")
     }
@@ -18,7 +21,7 @@ make_groups <- function(df, groups = NULL) {
 #' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
 #' @param hkg_ character string of provided housekeeping genes
 #' @examples
-#' sanitize(list_of_groups, khg = c("HKG"))
+#' sanitize(list_of_groups, hkg = c("HKG"))
 sanitize <- function(list_of_groups, hkg) {
     unlist(lapply(list_of_groups, function(gr) {
         if (any(is.na(gr$cq))) {
