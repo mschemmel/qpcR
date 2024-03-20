@@ -16,3 +16,4 @@ qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate
     rel_expr <- do.call("rbind", unname(pair_wise(clean_pairs, hkg)))
     return(conflate(rel_expr, do = aggregate))
 }
+
