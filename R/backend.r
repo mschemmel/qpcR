@@ -28,10 +28,10 @@ sanitize <- function(list_of_groups, hkg) {
             gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
             lapply(setdiff(gr$gene, hkg), function(x) {
                 pair_comp <- gr[gr$gene %in% c(x, hkg), ]
-                drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ], c("brep", "trep", "id"))
+                drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ])
             })
         } else {
-            list(gr)
+            list(drop_columns(gr))
         }
     }), recursive = FALSE)
 }

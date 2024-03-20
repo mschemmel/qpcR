@@ -31,7 +31,7 @@ get_reference_group <- function(df) {
 #' @param cols character vector of columns to drop
 #' @examples
 #' drop_columns(df, cols)
-drop_columns <- function(df, cols = NULL) {
+drop_columns <- function(df, cols = c("brep", "trep", "id")) {
     if (is.null(cols)) return(df)
     return(df[, -which(names(df) %in% cols)])
 }
