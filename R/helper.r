@@ -6,6 +6,9 @@ prepare <- function(df) {
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
     df$E <- get_e(as.numeric(gsub(",", ".", df$efficiency)))
+    cols <- colnames(df)
+    non_affected <- c("cq", "E", "efficiency")
+    df[!(cols %in% non_affected)] <- lapply(df[!(cols %in% non_affected)], as.character)
     return(df)
 }
 
@@ -21,7 +24,7 @@ get_e <- function(efficiency) {
 #' Select control group of data
 #' @param df data frame of provided genes
 #' @examples
-#' get_control_group(df)
+#' get_reference_group(df)
 get_reference_group <- function(df) {
     return(df[df$treatment == base::get("reference_group", qenv), ])
 }
@@ -32,8 +35,7 @@ get_reference_group <- function(df) {
 #' @examples
 #' drop_columns(df, cols)
 drop_columns <- function(df, cols = c("brep", "trep", "id")) {
-    if (is.null(cols)) return(df)
-    return(df[, -which(names(df) %in% cols)])
+    return(df[, names(df)[!(names(df) %in% cols)]])
 }
 
 #' Calculate geometric mean if multiple housekeeping genes are given

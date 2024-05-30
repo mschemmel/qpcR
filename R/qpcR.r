@@ -12,8 +12,7 @@ qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate
     assign("reference_group", reference, qenv)
     assign("groups", groups, qenv)
     requested_groups <- make_groups(prepare(df), hkg, groups)
-    clean_pairs <- sanitize(requested_groups, hkg)
-    rel_expr <- do.call("rbind", unname(pair_wise(clean_pairs, hkg)))
+    rel_expr <- do.call("rbind", unname(pair_wise(requested_groups, hkg)))
     return(conflate(rel_expr, do = aggregate))
 }
 

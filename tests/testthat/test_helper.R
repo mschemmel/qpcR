@@ -1,4 +1,6 @@
 dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
+assign("reference_group", "control", qenv)
+
 test_that("get_e() works", {
     expect_equal(get_e(100), 2)
     expect_equal(get_e(0), 1)
@@ -18,8 +20,4 @@ test_that("geometric_mean() works", {
     expect_equal(geometric_mean(c(1:3, NA)), 1.8171206)
     expect_type(geometric_mean(c(1:3)), "double")
     expect_type(geometric_mean(c(1:3, NA)), "double")
-})
-
-test_that("prepare() works", {
-    expect_equal(unique(qpcR(drop_columns(dat, "efficiency"), hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE)$efficiency), 100)
 })

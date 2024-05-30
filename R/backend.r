@@ -5,35 +5,21 @@
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, hkg, groups = NULL) {
-    cols <- colnames(df)
-    non_affected <- c("cq", "E", "efficiency")
-    df[!(cols %in% non_affected)] <- lapply(df[!(cols %in% non_affected)], as.character)
-    if (is.null(groups)) {
-        return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
-    }
-    if (!all(groups %in% colnames(df))) {
-        stop("Not all group(s) in data provided.")
-    }
-    return(split(df, as.list(df[groups]), drop = TRUE))
-}
-
-#' Remove NA sample wise as foundation of valid mean relative expression calculation
-#' @param list_of_groups output of 'make_groups' containing a list of groups to compare expression
-#' @param hkg_ character string of provided housekeeping genes
-#' @examples
-#' sanitize(list_of_groups, hkg = c("HKG"))
-sanitize <- function(list_of_groups, hkg) {
-    unlist(lapply(list_of_groups, function(gr) {
-        if (any(is.na(gr$cq))) {
-            gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
-            lapply(setdiff(gr$gene, hkg), function(x) {
-                pair_comp <- gr[gr$gene %in% c(x, hkg), ]
-                drop_columns(pair_comp[!(pair_comp$id %in% pair_comp[is.na(pair_comp$cq), ]$id), ])
+    if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
+    if (is.null(groups)) return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
+    groups_ <- split(df, as.list(df[groups]), drop = TRUE)
+    groups2 <- lapply(groups_, function(gr) {
+                # if NA is included - add id column and remove accordingly
+                if (any(is.na(gr$cq))) {
+                    gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
+                    gr <- gr[!(gr$id %in% gr[is.na(gr$cq), ]$id), ]
+                }
+                as.data.frame(lapply(setdiff(gr$gene, hkg), function(x) {
+                    gr <- gr[gr$gene %in% c(x, hkg), ]
+                    drop_columns(gr)
+                }))
             })
-        } else {
-            list(drop_columns(gr))
-        }
-    }), recursive = FALSE)
+    return(groups2)
 }
 
 #' Calculate delta cq values per comparison
@@ -79,7 +65,7 @@ ratio_by_mean_ratio <- function(df, hkg) {
 #' pair_wise(pair, hkg)
 pair_wise <- function(pair, hkg) {
     return(lapply(pair, function(x) {
-        ratio_by_mean_ratio(x, hkg)
+            ratio_by_mean_ratio(x, hkg)
     }))
 }
 
@@ -89,9 +75,9 @@ pair_wise <- function(pair, hkg) {
 #' @examples
 #' conflate(df)
 conflate <- function(df, do = TRUE) {
-    if (!do) return(df)
+    if (!do) return(df[order(df$treatment), ])
     formula_string <- paste0("rexpr ~ ", paste(c("treatment", "gene", get("groups", qenv)), collapse = "+"))
     stats <- function(x) c("mean" = mean(x), "sd" = sd(x), "n" = length(x))
-    return(do.call(data.frame, aggregate(as.formula(formula_string), df, stats)))
+    aggregate_out <- do.call(data.frame, aggregate(as.formula(formula_string), df, stats))
+    return(aggregate_out[order(aggregate_out$treatment), ])
 }
-
