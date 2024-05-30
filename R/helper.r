@@ -12,6 +12,17 @@ prepare <- function(df) {
     return(df)
 }
 
+#' Sanitize groups if NA in input data
+#' @param df input data.frame containing NA
+#' @examples
+#' sanitize(df)
+sanitize <- function(df) {
+     df$id <- paste0(df$treatment, df$brep, df$trep) #TODO: Allow user selection of unique ID
+     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
+     return(df)
+}
+
+
 #' Calculate E value of standard samples
 #' @param efficiency numeric vector of efficiency values in percent (vector, 0-100)
 #' @examples

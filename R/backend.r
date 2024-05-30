@@ -9,12 +9,9 @@ make_groups <- function(df, hkg, groups = NULL) {
     if (is.null(groups)) return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
     groups_ <- split(df, as.list(df[groups]), drop = TRUE)
     groups2 <- lapply(groups_, function(gr) {
-                # if NA is included - add id column and remove accordingly
-                if (any(is.na(gr$cq))) {
-                    gr$id <- paste0(gr$treatment, gr$brep, gr$trep) #TODO: Allow user selection of unique ID
-                    gr <- gr[!(gr$id %in% gr[is.na(gr$cq), ]$id), ]
-                }
-                as.data.frame(lapply(setdiff(gr$gene, hkg), function(x) {
+                if (any(is.na(gr$cq))) gr <- sanitize(gr)
+                # create every target-reference gene pair
+                data.frame(lapply(setdiff(gr$gene, hkg), function(x) {
                     gr <- gr[gr$gene %in% c(x, hkg), ]
                     drop_columns(gr)
                 }))
