@@ -5,20 +5,20 @@ Calculate relative gene expression of qPCR data
 
 Minimal requirement of input data
 ---
-The minimal structure of the input data has to contain following columns: `gene`, `treatment`, `cq`. 
+The minimal structure of the input data has to contain following columns: `gene`, `treatment`, `cq`.
 
 | Column | Description | Note |
 |--------|-------------|------|
-| gene | all investigated gene names |
-| treatment | variable to compare | 
+| gene | investigated gene names |
+| treatment | variable(s) to compare |
 | cq | cq value measured by qPCR machine |
-| efficiency | primer efficiency values | (optional) assumed to be 100 % if not provided
+| efficiency | primer efficiency values (%)| (optional) assumed to be 100 % if not provided
 
-If `cq` contains NA, `brep`, `trep` columns are needed to properly exclude samples
+If `cq` contains NA, `brep`, `trep` columns are needed to properly exclude samples.
 | Column | Description |
 |--------|-------------|
-| (brep | number of biological replicate) |
-| (trep | number of technical replicate) |
+| brep | number of biological replicate |
+| trep | number of technical replicate |
 
 
 An example dataset can be found in the `data` folder.
