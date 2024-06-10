@@ -1,22 +1,24 @@
+#' Get all combinations of target and housekeeping genes as list
+#' @param df data frame of every group
+#' @param hkg_ character string of housekeeping gene(s)
+comp_gene_pair <- function(df, hkg) {
+    return(lapply(setdiff(df$gene, hkg), function(x) { drop_columns(df[df$gene %in% c(x, hkg), ]) }))
+}
+
 #' Create chunks of groups for calculation
 #' @param df data frame of expression data
-#' @param hkg_ character string of provided housekeeping genes
+#' @param hkg character string of provided housekeeping gene(s)
 #' @param groups character vector of requested groups to compare (default: NULL)
 #' @examples
 #' make_groups(df, groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, hkg, groups = NULL) {
     if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
-    if (is.null(groups)) return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
-    groups2 <- lapply(split(df, as.list(df[groups]), drop = TRUE), function(gr) {
+    if (is.null(groups)) return(comp_gene_pair(df, hkg))
+    pairs <- lapply(split(df, as.list(df[groups]), drop = TRUE), function(gr) {
                 if (any(is.na(gr$cq))) gr <- sanitize(gr)
-                # create every target-reference gene pair
-                lapply(setdiff(gr$gene, hkg), function(x) {
-                    gr <- gr[gr$gene %in% c(x, hkg), ]
-                    drop_columns(gr)
-                })
+                comp_gene_pair(gr, hkg)
             })
-
-    return(unlist(groups2, recursive = FALSE))
+    return(unlist(pairs, recursive = FALSE))
 }
 
 #' Calculate delta cq values per comparison
