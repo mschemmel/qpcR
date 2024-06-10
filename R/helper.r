@@ -5,7 +5,8 @@
 prepare <- function(df) {
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
-    df$E <- get_e(as.numeric(gsub(",", ".", df$efficiency)))
+    df$efficiency[is.na(df$efficiency)] <- 100
+    df$E <- get_E(as.numeric(gsub(",", ".", df$efficiency)))
     cols <- colnames(df)
     non_affected <- c("cq", "E", "efficiency")
     df[!(cols %in% non_affected)] <- lapply(df[!(cols %in% non_affected)], as.character)
@@ -18,20 +19,16 @@ prepare <- function(df) {
 #' sanitize(df)
 sanitize <- function(df) {
     if (!all(c("brep", "trep") %in% colnames(df))) stop("Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
-    df$id <- paste0(df$treatment, df$brep, df$trep) #TODO: Allow user selection of unique ID
+    df$id <- paste0(df$treatment, df$brep, df$trep)
     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
     return(df)
 }
 
-
 #' Calculate E value of standard samples
 #' @param efficiency numeric vector of efficiency values in percent (vector, 0-100)
 #' @examples
-#' get_e(c(87,67,98,78))
-get_e <- function(efficiency) {
-    efficiency[is.na(efficiency)] <- 100
-    return((efficiency * 0.01) + 1)
-}
+#' get_E(c(87,67,98,78))
+get_E <- function(efficiency) { return((efficiency * 0.01) + 1) }
 
 #' Select control group of data
 #' @param df data frame of provided genes

@@ -2,11 +2,9 @@ dat <- read.table("example2.tsv", sep = "\t", head = TRUE)
 assign("reference_group", "control", qenv)
 
 test_that("get_e() works", {
-    expect_equal(get_e(100), 2)
-    expect_equal(get_e(0), 1)
-    expect_true(all(!(is.na(get_e(c(56, NA))))))
-    expect_type(get_e(1), "double")
-    expect_type(get_e(NA), "double")
+    expect_equal(get_E(100), 2)
+    expect_equal(get_E(0), 1)
+    expect_type(get_E(1), "double")
 })
 
 test_that("drop_columns() works", {

@@ -7,16 +7,16 @@
 make_groups <- function(df, hkg, groups = NULL) {
     if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
     if (is.null(groups)) return(lapply(setdiff(df$gene, hkg), function(x) { df[df$gene %in% c(x, hkg), ] }))
-    groups_ <- split(df, as.list(df[groups]), drop = TRUE)
-    groups2 <- lapply(groups_, function(gr) {
+    groups2 <- lapply(split(df, as.list(df[groups]), drop = TRUE), function(gr) {
                 if (any(is.na(gr$cq))) gr <- sanitize(gr)
                 # create every target-reference gene pair
-                data.frame(lapply(setdiff(gr$gene, hkg), function(x) {
+                lapply(setdiff(gr$gene, hkg), function(x) {
                     gr <- gr[gr$gene %in% c(x, hkg), ]
                     drop_columns(gr)
-                }))
+                })
             })
-    return(groups2)
+
+    return(unlist(groups2, recursive = FALSE))
 }
 
 #' Calculate delta cq values per comparison
