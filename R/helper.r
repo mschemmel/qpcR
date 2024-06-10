@@ -17,9 +17,10 @@ prepare <- function(df) {
 #' @examples
 #' sanitize(df)
 sanitize <- function(df) {
-     df$id <- paste0(df$treatment, df$brep, df$trep) #TODO: Allow user selection of unique ID
-     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
-     return(df)
+    if (!all(c("brep", "trep") %in% colnames(df))) stop("Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
+    df$id <- paste0(df$treatment, df$brep, df$trep) #TODO: Allow user selection of unique ID
+    df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
+    return(df)
 }
 
 
