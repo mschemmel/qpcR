@@ -9,6 +9,7 @@ qenv <- new.env()
 #' qpcr(df, hkg = c("HKG"))
 #' @export
 qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate = TRUE) {
+    if(is.null(hkg)) stop("No housekeeping gene provided.")
     assign("reference_group", reference, qenv)
     assign("groups", groups, qenv)
     requested_groups <- make_groups(prepare(df), hkg, groups)

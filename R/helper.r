@@ -51,6 +51,10 @@ drop_columns <- function(df, cols = c("brep", "trep", "id")) {
 #' @param values vector of numeric values
 #' @examples
 #' geometric_mean(c(0.23,0.53,0.12))
-geometric_mean <- function(values) {
-    return(exp(mean(log(na.omit(values)))))
-}
+geometric_mean <- function(values) return(exp(mean(log(na.omit(values)))))
+
+#' Calculate standard error
+#' @param x numeric vector of expression values
+#' @examples
+#' se(runif(10))
+se <- function(x) return(sd(x) / sqrt(length(x)))

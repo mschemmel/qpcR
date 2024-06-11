@@ -73,10 +73,10 @@ pair_wise <- function(pair, hkg) {
 #' @param do boolean if to aggregate the input data (default: TRUE)
 #' @examples
 #' conflate(df)
-conflate <- function(df, do = TRUE) {
+conflate <- function(df, do) {
     if (!do) return(df[order(df$treatment), ])
     formula_string <- paste0("rexpr ~ ", paste(c("treatment", "gene", get("groups", qenv)), collapse = "+"))
-    stats <- function(x) c("mean" = mean(x), "sd" = sd(x), "n" = length(x))
+    stats <- function(x) c("mean" = mean(x), "sd" = sd(x), "se" = se(x), "n" = length(x))
     aggregate_out <- do.call(data.frame, aggregate(as.formula(formula_string), df, stats))
     return(aggregate_out[order(aggregate_out$treatment), ])
 }
