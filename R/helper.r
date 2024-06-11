@@ -58,3 +58,9 @@ geometric_mean <- function(values) return(exp(mean(log(na.omit(values)))))
 #' @examples
 #' se(runif(10))
 se <- function(x) return(sd(x) / sqrt(length(x)))
+
+#' Check for outlier in expression values
+#' @param x numeric vector of expression data
+#' @examples
+#' remove_outlier(x)
+remove_outlier <- function(x) x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x)
