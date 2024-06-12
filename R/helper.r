@@ -62,5 +62,15 @@ se <- function(x) return(sd(x) / sqrt(length(x)))
 #' Check for outlier in expression values
 #' @param x numeric vector of expression data
 #' @examples
-#' remove_outlier(x)
-remove_outlier <- function(x) x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x)
+#' find_outlier(x)
+interquartile_range <- function(x) return(x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x))
+
+#' Cut vector into half
+#' @param x numeric vector
+#' @param chunk_size number of elements per chunk (default: 2)
+#' @examples
+#' cut_in_half(c(1:10))
+cut_in_half <- function(x, chunk_size = 2) {
+    if (length(x) %% chunk_size != 0) stop("Chunks not equal in length.")
+    return(split(x, ceiling(seq_along(x) / (length(x) / chunk_size))))
+}

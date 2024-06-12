@@ -8,11 +8,12 @@ qenv <- new.env()
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
-qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate = TRUE) {
+qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate = TRUE, outlier = TRUE) {
     if(is.null(hkg)) stop("No housekeeping gene provided.")
     assign("reference_group", reference, qenv)
     assign("groups", groups, qenv)
     requested_groups <- make_groups(prepare(df), hkg, groups)
+    requested_groups <- filter_outlier(requested_groups, do = outlier)
     rel_expr <- do.call("rbind", unname(pair_wise(requested_groups, hkg)))
     return(conflate(rel_expr, do = aggregate))
 }

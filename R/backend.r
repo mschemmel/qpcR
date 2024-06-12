@@ -21,6 +21,18 @@ make_groups <- function(df, hkg, groups = NULL) {
     return(unlist(pairs, recursive = FALSE))
 }
 
+#' Filter outlier of expression values, gene and treatment specific
+#' @param df data frame of expression data
+#' @examples
+#' filter_outlier(df)
+filter_outlier <- function(df, do) {
+    if (!do) return(df)
+    return(lapply(df, function(x) {
+        outlier <- Reduce('+', cut_in_half(with(x, ave(cq, list(gene, treatment), FUN = interquartile_range))))
+        return(x[outlier == 0, ])
+    }))
+}
+
 #' Calculate delta cq values per comparison
 #' @param df clean data of given group
 #' @examples
