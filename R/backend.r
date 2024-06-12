@@ -15,7 +15,7 @@ make_groups <- function(df, hkg, groups = NULL) {
     if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
     if (is.null(groups)) return(comp_gene_pair(df, hkg))
     pairs <- lapply(split(df, as.list(df[groups]), drop = TRUE), function(gr) {
-                if (any(is.na(gr$cq))) gr <- sanitize(gr)
+                if (any(is.na(gr$cq))) gr <- filter_NA(gr)
                 comp_gene_pair(gr, hkg)
             })
     return(unlist(pairs, recursive = FALSE))
@@ -23,6 +23,7 @@ make_groups <- function(df, hkg, groups = NULL) {
 
 #' Filter outlier of expression values, gene and treatment specific
 #' @param df data frame of expression data
+#' @param do boolean if expression values should be filtered by outliers
 #' @examples
 #' filter_outlier(df)
 filter_outlier <- function(df, do) {

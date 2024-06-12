@@ -17,7 +17,7 @@ prepare <- function(df) {
 #' @param df input data.frame containing NA
 #' @examples
 #' sanitize(df)
-sanitize <- function(df) {
+filter_NA <- function(df) {
     if (!all(c("brep", "trep") %in% colnames(df))) stop("Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
     df$id <- paste0(df$treatment, df$brep, df$trep)
     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
