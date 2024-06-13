@@ -66,7 +66,7 @@ se <- function(x) return(sd(x) / sqrt(length(x)))
 #' outlier_method(x)
 outlier_method <- function(x, method) {
     if (!is.numeric(x)) stop("Input vector for outlier detection is not numeric.")
-    if (!any(method %in% c("interquartile", "z-score", "hampel"))) stop("Outlier detection method not supported. Please choose 'interquartile', 'z-score' or 'hampel'.")
+    if (!(method %in% c("interquartile", "z-score", "hampel"))) stop("Outlier detection method not supported. Please choose 'interquartile', 'z-score' or 'hampel'.")
     switch(method,
            "interquartile" = x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x),
            "z-score" = abs((x - mean(x)) / sd(x)) > 3,

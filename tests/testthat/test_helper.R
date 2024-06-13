@@ -19,3 +19,13 @@ test_that("geometric_mean() works", {
     expect_type(geometric_mean(c(1:3)), "double")
     expect_type(geometric_mean(c(1:3, NA)), "double")
 })
+
+test_that("outlier_method() works", {
+    num_range <- c(1:4, 100)
+    expect_error(outlier_method(c(num_range, "test"), method = "interquartile"))
+    expect_error(outlier_method(num_range, method = "test"))
+    expect_equal(outlier_method(num_range, "interquartile"), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+    expect_equal(outlier_method(num_range, "z-score"), c(FALSE, FALSE, FALSE, FALSE, FALSE))
+    expect_equal(outlier_method(num_range, "hampel"), c(FALSE, FALSE, FALSE, FALSE, TRUE))
+    expect_type(outlier_method(num_range, "hampel"), "logical")
+})

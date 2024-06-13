@@ -6,7 +6,7 @@ test_that("qpcR() works", {
 
     run2 <- get_reference_group(qpcR(dat, hkg = c("HKG", "HKG2"), reference = "control", groups = "dpi", aggregate = FALSE))
     control_groups2 <- aggregate(rexpr ~ gene + dpi, data = run2, FUN = mean)
-    expect_equal(unique(control_groups2$rexpr), 1)
+    expect_equal(unique(control_groups2$rexpr), c(1, 1))
 })
 
 test_that("output equals data.frame", {
