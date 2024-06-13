@@ -59,11 +59,19 @@ geometric_mean <- function(values) return(exp(mean(log(na.omit(values)))))
 #' se(runif(10))
 se <- function(x) return(sd(x) / sqrt(length(x)))
 
-#' Check for outlier in expression values
-#' @param x numeric vector of expression data
+#' Check for outliers in expression values
+#' @param x numeric vector of expression data (cq column)
+#' @param method method to apply to find outliers of numeric vector
 #' @examples
-#' find_outlier(x)
-interquartile_range <- function(x) return(x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x))
+#' outlier_method(x)
+outlier_method <- function(x, method) {
+    if (!is.numeric(x)) stop("Input vector for outlier detection is not numeric.")
+    if (!any(method %in% c("interquartile", "z-score", "hampel"))) stop("Outlier detection method not supported. Please choose 'interquartile', 'z-score' or 'hampel'.")
+    switch(method,
+           "interquartile" = x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x),
+           "z-score" = abs((x - mean(x)) / sd(x)) > 3,
+           "hampel" = x < (median(x) - 3 * mad(x, constant = 1)) | x > (median(x) + 3 * mad(x, constant = 1)))
+}
 
 #' Cut vector into half
 #' @param x numeric vector
