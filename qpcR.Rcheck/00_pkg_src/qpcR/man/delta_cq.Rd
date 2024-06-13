@@ -7,7 +7,9 @@
 delta_cq(df)
 }
 \arguments{
-\item{df}{clean data of given group}
+\item{df}{clean data frame of expression data}
+
+\item{contr_mean}{object of control_mean function}
 }
 \description{
 Calculate delta cq values per comparison

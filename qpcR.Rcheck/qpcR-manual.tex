@@ -1,0 +1,316 @@
+\nonstopmode{}
+\documentclass[letterpaper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `qpcR'}}
+\par\bigskip{\large \today}
+\end{center}
+\inputencoding{utf8}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {qpcR: R package to perform calculation of relative gene expression of qPCR data}}}{}\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdfauthor = {Markus Schemmel}}}{}\begin{description}
+\raggedright{}
+\item[Title]\AsIs{R package to perform calculation of relative gene expression of
+qPCR data}
+\item[Version]\AsIs{0.0.0.9000}
+\item[Description]\AsIs{Uses qPCR data to calculate relative mean expression values of targets compared to housekeeping genes.}
+\item[License]\AsIs{use_mit_license()}
+\item[Encoding]\AsIs{UTF-8}
+\item[Roxygen]\AsIs{list(markdown = TRUE)}
+\item[RoxygenNote]\AsIs{7.2.3}
+\item[LazyData]\AsIs{true}
+\item[Language]\AsIs{en-US}
+\item[Imports]\AsIs{stats}
+\item[Suggests]\AsIs{testthat (>= 3.0.0)}
+\item[Config/testthat/edition]\AsIs{3}
+\item[NeedsCompilation]\AsIs{no}
+\item[Author]\AsIs{Markus Schemmel [aut, cre]}
+\item[Maintainer]\AsIs{Markus Schemmel }\email{m.schemmel@online.com}\AsIs{}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{delta\_cq}{Calculate delta cq values per comparison}{delta.Rul.cq}
+%
+\begin{Description}\relax
+Calculate delta cq values per comparison
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+delta_cq(df)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] clean data frame of expression data
+
+\item[\code{contr\_mean}] object of control\_mean function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+delta_cq(df, contr_mean)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{drop\_columns}{Drop columns based on character vector}{drop.Rul.columns}
+%
+\begin{Description}\relax
+Drop columns based on character vector
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+drop_columns(df, cols = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] input data frame
+
+\item[\code{cols}] character vector of columns to drop
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+drop_columns(df, cols)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{geometric\_mean}{Calculate geometric mean if multiple housekeeping genes are given}{geometric.Rul.mean}
+%
+\begin{Description}\relax
+Calculate geometric mean if multiple housekeeping genes are given
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+geometric_mean(values)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{values}] vector of numeric values
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+geometric_mean(c(0.23,0.53,0.12))
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get\_e}{Calculate E value of standard samples}{get.Rul.e}
+%
+\begin{Description}\relax
+Calculate E value of standard samples
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get_e(efficiency_of_standard)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{efficiency\_of\_standard}] efficiency values in percent (list, 0-100)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+get_e(named_list)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{get\_reference\_group}{Select control group of data}{get.Rul.reference.Rul.group}
+%
+\begin{Description}\relax
+Select control group of data
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+get_reference_group(df)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] data frame of provided genes
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+get_control_group(df)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{make\_groups}{Create chunks of groups for calculation}{make.Rul.groups}
+%
+\begin{Description}\relax
+Create chunks of groups for calculation
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+make_groups(df, groups)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] data frame of expression data
+
+\item[\code{groups}] character vector of requested groups to compare
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+make_groups(df, groups = c("plate", "diet", "timepoint"))
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{pair\_wise}{Apply calculation for every hkg vs. target pair}{pair.Rul.wise}
+%
+\begin{Description}\relax
+Apply calculation for every hkg vs. target pair
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+pair_wise(pair, hkg)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{pair}] named list of pairs (data)
+
+\item[\code{hkg}] character vector of housekeeping genes
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+pair_wise(pair, e_values, hkg)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{prepare}{Prepare input data}{prepare}
+%
+\begin{Description}\relax
+Prepare input data
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+prepare(df)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] input data.frame of qPCR data
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+prepare(df)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{qpcR}{Main function to perform calculation of relative expression of qpcr data}{qpcR}
+%
+\begin{Description}\relax
+Main function to perform calculation of relative expression of qpcr data
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+qpcR(df, hkg = NULL, reference = "control", groups = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] data frame of qpcr data
+
+\item[\code{hkg}] character vector of housekeeping genes
+
+\item[\code{efficiency}] named list of efficiency values
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+qpcr(df, hkg = c("HKG"))
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ratio\_by\_mean\_ratio}{Calculate the ratio compared to the mean ratio per gene}{ratio.Rul.by.Rul.mean.Rul.ratio}
+%
+\begin{Description}\relax
+Calculate the ratio compared to the mean ratio per gene
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ratio_by_mean_ratio(df, hkg)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{df}] data frame of requested groups
+
+\item[\code{hkg}] character vector of housekeeping genes
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{sanitize}{Remove NA sample wise as foundation of valid mean relative expression calculation}{sanitize}
+%
+\begin{Description}\relax
+Remove NA sample wise as foundation of valid mean relative expression calculation
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+sanitize(list_of_groups, hkg_)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{list\_of\_groups}] output of 'make\_groups' containing a list of groups to compare expression
+
+\item[\code{hkg\_}] character string of provided housekeeping genes
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Examples}
+\begin{ExampleCode}
+sanitize(list_of_groups, khg_ = c("HKG"))
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

@@ -4,14 +4,30 @@
 \alias{qpcR}
 \title{Main function to perform calculation of relative expression of qpcr data}
 \usage{
-qpcR(df, hkg = NULL, reference = "control", groups = NULL)
+qpcR(
+  df,
+  hkg = NULL,
+  reference = "control",
+  groups = NULL,
+  aggregate = TRUE,
+  outlier = TRUE,
+  outlier.method = "interquartile"
+)
 }
 \arguments{
 \item{df}{data frame of qpcr data}
 
 \item{hkg}{character vector of housekeeping genes}
 
-\item{efficiency}{named list of efficiency values}
+\item{reference}{character vector of reference sample (default = control)}
+
+\item{groups}{character vector of conditions to group on}
+
+\item{aggregate}{boolean if output should be aggregated by groups or not (reference will equal 1, default = TRUE)}
+
+\item{outlier}{boolean if outlier should be detected and removed before calculation of relative expression values (default = TRUE)}
+
+\item{outlier.method}{character string to choose the method to remove outliers (default: interquartile)}
 }
 \description{
 Main function to perform calculation of relative expression of qpcr data

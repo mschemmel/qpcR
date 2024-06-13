@@ -2,7 +2,7 @@
 % Please edit documentation in R/backend.r
 \name{pair_wise}
 \alias{pair_wise}
-\title{Apply calculation for every HKG vs. target pair}
+\title{Apply calculation for every hkg vs. target pair}
 \usage{
 pair_wise(pair, hkg)
 }
@@ -12,8 +12,8 @@ pair_wise(pair, hkg)
 \item{hkg}{character vector of housekeeping genes}
 }
 \description{
-Apply calculation for every HKG vs. target pair
+Apply calculation for every hkg vs. target pair
 }
 \examples{
-pair_wise(pair, hkg)
+pair_wise(pair, e_values, hkg)
 }

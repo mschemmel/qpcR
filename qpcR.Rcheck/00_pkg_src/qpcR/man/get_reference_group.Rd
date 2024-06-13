@@ -13,5 +13,5 @@ get_reference_group(df)
 Select control group of data
 }
 \examples{
-get_reference_group(df)
+get_control_group(df)
 }

@@ -15,5 +15,5 @@ ratio_by_mean_ratio(df, hkg)
 Calculate the ratio compared to the mean ratio per gene
 }
 \examples{
-ratio_by_mean_ratio(df, hkg)
+ratio_by_mean_ratio(df, d_cq, e_val, hkg_, treatm)
 }

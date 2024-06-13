@@ -4,7 +4,7 @@
 \alias{drop_columns}
 \title{Drop columns based on character vector}
 \usage{
-drop_columns(df, cols = c("brep", "trep", "id"))
+drop_columns(df, cols = NULL)
 }
 \arguments{
 \item{df}{input data frame}

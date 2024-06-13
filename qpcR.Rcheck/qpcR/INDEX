@@ -1,0 +1,15 @@
+delta_cq                Calculate delta cq values per comparison
+drop_columns            Drop columns based on character vector
+geometric_mean          Calculate geometric mean if multiple
+                        housekeeping genes are given
+get_e                   Calculate E value of standard samples
+get_reference_group     Select control group of data
+make_groups             Create chunks of groups for calculation
+pair_wise               Apply calculation for every hkg vs. target pair
+prepare                 Prepare input data
+qpcR                    Main function to perform calculation of
+                        relative expression of qpcr data
+ratio_by_mean_ratio     Calculate the ratio compared to the mean ratio
+                        per gene
+sanitize                Remove NA sample wise as foundation of valid
+                        mean relative expression calculation

@@ -4,14 +4,12 @@
 \alias{make_groups}
 \title{Create chunks of groups for calculation}
 \usage{
-make_groups(df, hkg, groups = NULL)
+make_groups(df, groups)
 }
 \arguments{
 \item{df}{data frame of expression data}
 
-\item{hkg}{character string of provided housekeeping gene(s)}
-
-\item{groups}{character vector of requested groups to compare (default: NULL)}
+\item{groups}{character vector of requested groups to compare}
 }
 \description{
 Create chunks of groups for calculation

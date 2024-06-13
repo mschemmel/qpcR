@@ -1,0 +1,20 @@
+Package: qpcR
+Title: R package to perform calculation of relative gene expression of
+        qPCR data
+Version: 0.0.0.9000
+Authors@R: person("Markus", "Schemmel", , "m.schemmel@online.com", role = c("aut", "cre"))
+Description: Uses qPCR data to calculate relative mean expression values of targets compared to housekeeping genes.
+License: use_mit_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+LazyData: true
+Language: en-US
+Imports: stats
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
+NeedsCompilation: no
+Packaged: 2024-06-13 13:35:05 UTC; Markus
+Author: Markus Schemmel [aut, cre]
+Maintainer: Markus Schemmel <m.schemmel@online.com>
+Built: R 4.1.2; ; 2024-06-13 13:41:23 UTC; unix
