@@ -1,6 +1,9 @@
 #' Get all combinations of target and housekeeping genes as list
 #' @param df data frame of every group
 #' @param hkg_ character string of housekeeping gene(s)
+#' @returns a list of all target x housekeeping genes combinations
+#' @examples
+#' comp_gene_pair(df, "Actin")
 comp_gene_pair <- function(df, hkg) {
     return(lapply(setdiff(df$gene, hkg), function(x) { drop_columns(df[df$gene %in% c(x, hkg), ]) }))
 }
@@ -9,8 +12,9 @@ comp_gene_pair <- function(df, hkg) {
 #' @param df data frame of expression data
 #' @param hkg character string of provided housekeeping gene(s)
 #' @param groups character vector of requested groups to compare (default: NULL)
+#' @returns a list of all target x housekeeping x group combinations
 #' @examples
-#' make_groups(df, groups = c("plate", "diet", "timepoint"))
+#' make_groups(df, hkg = "HKG", groups = c("plate", "diet", "timepoint"))
 make_groups <- function(df, hkg, groups = NULL) {
     if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
     if (is.null(groups)) return(comp_gene_pair(df, hkg))
@@ -25,8 +29,9 @@ make_groups <- function(df, hkg, groups = NULL) {
 #' @param df data frame of expression data
 #' @param method method to apply to find outliers of numeric vector
 #' @param do boolean if expression values should be filtered by outliers
+#' @returns a data frame with removed outlier values based on a selected method ('interquartile', 'z-score', 'hampel')
 #' @examples
-#' filter_outlier(df)
+#' filter_outlier(df, method = "interquartile", do = TRUE)
 filter_outlier <- function(df, method, do) {
     if (!do) return(df)
     return(lapply(df, function(x) {
@@ -37,8 +42,9 @@ filter_outlier <- function(df, method, do) {
 
 #' Calculate delta cq values per comparison
 #' @param df clean data of given group
+#' @returns a data frame with added columns 'ref_mean' and 'delta_cq' as prerequisite for relative expression calculation
 #' @examples
-#' delta_cq(df, contr_mean)
+#' delta_cq(df)
 delta_cq <- function(df) {
     ref <- get_reference_group(df)
     ref_mean <- tapply(ref$cq, ref$gene, mean)
@@ -49,6 +55,7 @@ delta_cq <- function(df) {
 
 #' Calculate efficiency based ratio of delta cq value
 #' @param df data frame to add ratio column to
+#' @returns a data frame with added column 'ratio' containing efficiency based ratio values of delta cq values
 #' @examples
 #' ratio(df)
 ratio <- function(df) {
@@ -59,6 +66,7 @@ ratio <- function(df) {
 #' Calculate the ratio compared to the mean ratio per gene
 #' @param df data frame of requested groups
 #' @param hkg character vector of housekeeping genes
+#' @returns a data frame with calculted ratio of a gene compared to the mean ratio
 #' @examples
 #' ratio_by_mean_ratio(df, hkg)
 ratio_by_mean_ratio <- function(df, hkg) {
@@ -74,6 +82,7 @@ ratio_by_mean_ratio <- function(df, hkg) {
 #' Apply calculation for every HKG vs. target pair
 #' @param pair named list of pairs (data)
 #' @param hkg character vector of housekeeping genes
+#' @returns a lists of calculated ratios (data frame) for every housekeeping vs. target gene pair
 #' @examples
 #' pair_wise(pair, hkg)
 pair_wise <- function(pair, hkg) {
@@ -85,6 +94,7 @@ pair_wise <- function(pair, hkg) {
 #' Summarize expression data
 #' @param df data frame of relative expression data
 #' @param do boolean if to aggregate the input data (default: TRUE)
+#' @returns the final output of calculated relative expression values
 #' @examples
 #' conflate(df)
 conflate <- function(df, do) {

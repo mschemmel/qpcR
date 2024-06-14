@@ -8,6 +8,7 @@ qenv <- new.env()
 #' @param aggregate boolean if output should be aggregated by groups or not (reference will equal 1, default = TRUE)
 #' @param outlier boolean if outlier should be detected and removed before calculation of relative expression values (default = TRUE)
 #' @param outlier.method character string to choose the method to remove outliers (default: interquartile)
+#' @returns data frame of relative expression values compared by provided groups and housekeeping genes
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
 #' @export
