@@ -12,3 +12,13 @@ test_that("qpcR() works", {
 test_that("output equals data.frame", {
     expect_type(qpcR(dat, hkg = c("HKG"), groups = "dpi"), "list")
 })
+
+test_that("all output columns present", {
+    expect_equal(colnames(qpcR(dat, hkg = c("HKG"), groups = "dpi")), c("treatment", "gene", "dpi", "rexpr.mean", "rexpr.sd", "rexpr.se", "rexpr.n"))
+})
+
+test_that("valid input parameter present", {
+    expect_error(qpcR(dat, groups = "dpi"))
+    expect_error(qpcR(dat, hkg = c("HKG"), treatment = "Control", groups = "dpi"))
+    expect_error(qpcR(dat, hkg = c("HKG_"), groups = "dpi"))
+})

@@ -1,6 +1,6 @@
 qenv <- new.env()
 
-#' Main function to perform calculation of relative expression of qpcr data
+#' Main function to perform calculation of relative expression values of qpcr data
 #' @param df data frame of qpcr data
 #' @param hkg character vector of housekeeping genes
 #' @param reference character vector of reference sample (default = control)
@@ -9,16 +9,21 @@ qenv <- new.env()
 #' @param outlier boolean if outlier should be detected and removed before calculation of relative expression values (default = TRUE)
 #' @param outlier.method character string to choose the method to remove outliers (default: interquartile)
 #' @returns data frame of relative expression values compared by provided groups and housekeeping genes
+#' @export
 #' @examples
 #' qpcr(df, hkg = c("HKG"))
-#' @export
 qpcR <- function(df, hkg = NULL, reference = "control", groups = NULL, aggregate = TRUE, outlier = TRUE, outlier.method = "interquartile") {
-    if(is.null(hkg)) stop("No housekeeping gene provided.")
+    # check input parameter
+    if (is.null(hkg)) stop("No housekeeping gene provided.")
+    if (!(all(hkg %in% unique(df$gene)))) stop("Housekeeping gene(s) not present in input data.")
+    if (!(reference %in% unique(df$treatment))) stop("Value provided as reference not present in input data.")
+
+    #### main routine ###
     assign("reference_group", reference, qenv)
     assign("groups", groups, qenv)
-    requested_groups <- make_groups(prepare(df), hkg, groups)
-    requested_groups <- filter_outlier(requested_groups, method = outlier.method, do = outlier)
-    rel_expr <- do.call("rbind", unname(pair_wise(requested_groups, hkg)))
+    groups <- make_groups(prepare(df), hkg, groups)
+    groups <- filter_outlier(groups, method = outlier.method, do = outlier)
+    rel_expr <- do.call("rbind", unname(pair_wise(groups, hkg)))
     return(conflate(rel_expr, do = aggregate))
 }
 
