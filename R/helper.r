@@ -91,3 +91,20 @@ cut_in_half <- function(x, chunk_size = 2) {
     if (length(x) %% chunk_size != 0) stop("Chunks not equal in length.")
     return(split(x, ceiling(seq_along(x) / (length(x) / chunk_size))))
 }
+
+#' Detect variable of input data used as 'reference'
+#' @param treatment vector of unique character strings found in input data ('treatment' column)
+#' @param reference vector of single reference value
+#' @returns character string used as 'reference' group for further calculations
+#' @examples
+#' detect_reference(c("control", "infected", "inoculated"), "control")
+detect_reference <- function(treatment, reference) {
+    if (is.null(reference)) {
+        ref_defaults <- c("Control", "control", "Mock", "mock", "Kontrolle", "kontrolle", "C", "c", "K", "k")
+        ref_ <- treatment[treatment %in% ref_defaults]
+        if (length(ref_) > 1) stop("Found more than one 'reference' variable in 'treatment' column.")
+        return(ref_)
+    }
+    if (!(any(reference %in% unique(treatment)))) stop("Variable provided as 'reference' not present in input data.")
+    return(reference)
+}
