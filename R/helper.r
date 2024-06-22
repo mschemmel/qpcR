@@ -95,7 +95,7 @@ cut_in_half <- function(x, chunk_size = 2) {
 #' Detect variable of input data used as 'reference'
 #' @param treatment vector of unique character strings found in input data ('treatment' column)
 #' @param reference vector of single reference value
-#' @returns character string used as 'reference' group for further calculations
+#' @returns character string used as 'reference'
 #' @examples
 #' detect_reference(c("control", "infected", "inoculated"), "control")
 detect_reference <- function(treatment, reference) {

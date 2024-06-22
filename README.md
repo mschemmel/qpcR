@@ -10,7 +10,7 @@ The minimal structure of the input data has to contain following columns: `gene`
 | Column | Description | Note |
 |--------|-------------|------|
 | `gene` | investigated genes | |
-| `treatment` | variable to compare to | default: 'control' |
+| `treatment` | variable to compare|
 | `cq` | cq value measured by qPCR machine | |
 | `efficiency` | primer efficiency values (%)| (optional) assumed to be 100 % if not provided |
 
