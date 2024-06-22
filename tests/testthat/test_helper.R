@@ -29,3 +29,11 @@ test_that("outlier_method() works", {
     expect_equal(outlier_method(num_range, "hampel"), c(FALSE, FALSE, FALSE, FALSE, TRUE))
     expect_type(outlier_method(num_range, "hampel"), "logical")
 })
+
+test_that("reference detection reacts properly", {
+    expect_equal(detect_reference(c("control", "infected", "inoculated"), "control"), "control")
+    expect_equal(detect_reference(c("control", "mock", "infected"), "mock"), "mock")
+    expect_error(detect_reference(c("control", "mock", "infected"), NULL))
+    expect_error(detect_reference(c("inoculated", "infected"), "test"))
+    expect_error(detect_reference(c("inoculated", "infected"), NULL))
+})
