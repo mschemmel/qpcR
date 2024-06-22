@@ -55,6 +55,7 @@ drop_columns <- function(df, cols = c("brep", "trep", "id")) {
 #' Calculate geometric mean if multiple housekeeping genes are given
 #' @param values vector of numeric values
 #' @returns geometric mean of numeric input vector
+#' @importFrom stats na.omit
 #' @examples
 #' geometric_mean(c(0.23,0.53,0.12))
 geometric_mean <- function(values) return(exp(mean(log(na.omit(values)))))
@@ -69,6 +70,7 @@ se <- function(x) return(sd(x) / sqrt(length(x)))
 #' Check for outliers in expression values
 #' @param x numeric vector of expression data (cq column)
 #' @param method method to apply to find outliers of numeric vector
+#' @importFrom stats quantile IQR median mad
 #' @returns boolean vector of numeric input data if outlier were detected by choosed method
 #' @examples
 #' outlier_method(x)

@@ -11,6 +11,9 @@ ratio_by_mean_ratio(df, hkg)
 
 \item{hkg}{character vector of housekeeping genes}
 }
+\value{
+a data frame with calculted ratio of a gene compared to the mean ratio
+}
 \description{
 Calculate the ratio compared to the mean ratio per gene
 }

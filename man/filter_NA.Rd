@@ -9,6 +9,9 @@ filter_NA(df)
 \arguments{
 \item{df}{input data.frame containing NA}
 }
+\value{
+data frame without NA values in cq column by removing sample specific values per group to ensure balanced number of observations
+}
 \description{
 Sanitize groups if NA in input data
 }

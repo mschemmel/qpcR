@@ -11,6 +11,9 @@ conflate(df, do)
 
 \item{do}{boolean if to aggregate the input data (default: TRUE)}
 }
+\value{
+the final output of calculated relative expression values
+}
 \description{
 Summarize expression data
 }

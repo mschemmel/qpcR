@@ -9,6 +9,9 @@ prepare(df)
 \arguments{
 \item{df}{input data.frame of qPCR data}
 }
+\value{
+clean data frame of input data (type conversion, adding default values, calculate E values of efficiency)
+}
 \description{
 Prepare input data
 }

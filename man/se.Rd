@@ -9,6 +9,9 @@ se(x)
 \arguments{
 \item{x}{numeric vector of expression values}
 }
+\value{
+standard error of numeric input vector
+}
 \description{
 Calculate standard error
 }

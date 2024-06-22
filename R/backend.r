@@ -1,9 +1,9 @@
 #' Get all combinations of target and housekeeping genes as list
 #' @param df data frame of every group
-#' @param hkg_ character string of housekeeping gene(s)
-#' @returns a list of all target x housekeeping genes combinations
+#' @param hkg character string of housekeeping gene(s)
+#' @returns a list of all target x housekeeping gene combinations
 #' @examples
-#' comp_gene_pair(df, "Actin")
+#' comp_gene_pair(df, "HKG")
 comp_gene_pair <- function(df, hkg) {
     return(lapply(setdiff(df$gene, hkg), function(x) { drop_columns(df[df$gene %in% c(x, hkg), ]) }))
 }
@@ -95,6 +95,7 @@ pair_wise <- function(pair, hkg) {
 #' @param df data frame of relative expression data
 #' @param do boolean if to aggregate the input data (default: TRUE)
 #' @returns the final output of calculated relative expression values
+#' @importFrom stats aggregate sd as.formula
 #' @examples
 #' conflate(df)
 conflate <- function(df, do) {

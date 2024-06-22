@@ -11,6 +11,9 @@ outlier_method(x, method)
 
 \item{method}{method to apply to find outliers of numeric vector}
 }
+\value{
+boolean vector of numeric input data if outlier were detected by choosed method
+}
 \description{
 Check for outliers in expression values
 }

@@ -11,6 +11,9 @@ pair_wise(pair, hkg)
 
 \item{hkg}{character vector of housekeeping genes}
 }
+\value{
+a lists of calculated ratios (data frame) for every housekeeping vs. target gene pair
+}
 \description{
 Apply calculation for every HKG vs. target pair
 }

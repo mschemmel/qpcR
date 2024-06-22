@@ -9,6 +9,9 @@ get_reference_group(df)
 \arguments{
 \item{df}{data frame of provided genes}
 }
+\value{
+data frame of selected reference group (treatment == reference)
+}
 \description{
 Select control group of data
 }

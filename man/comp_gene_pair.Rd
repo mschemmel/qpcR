@@ -9,8 +9,14 @@ comp_gene_pair(df, hkg)
 \arguments{
 \item{df}{data frame of every group}
 
-\item{hkg_}{character string of housekeeping gene(s)}
+\item{hkg}{character string of housekeeping gene(s)}
+}
+\value{
+a list of all target x housekeeping gene combinations
 }
 \description{
 Get all combinations of target and housekeeping genes as list
+}
+\examples{
+comp_gene_pair(df, "HKG")
 }

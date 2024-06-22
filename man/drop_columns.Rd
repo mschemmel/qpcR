@@ -11,6 +11,9 @@ drop_columns(df, cols = c("brep", "trep", "id"))
 
 \item{cols}{character vector of columns to drop}
 }
+\value{
+data frame with omitted columns
+}
 \description{
 Drop columns based on character vector
 }

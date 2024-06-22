@@ -13,9 +13,12 @@ make_groups(df, hkg, groups = NULL)
 
 \item{groups}{character vector of requested groups to compare (default: NULL)}
 }
+\value{
+a list of all target x housekeeping x group combinations
+}
 \description{
 Create chunks of groups for calculation
 }
 \examples{
-make_groups(df, groups = c("plate", "diet", "timepoint"))
+make_groups(df, hkg = "HKG", groups = c("plate", "diet", "timepoint"))
 }

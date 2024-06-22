@@ -11,6 +11,9 @@ cut_in_half(x, chunk_size = 2)
 
 \item{chunk_size}{number of elements per chunk (default: 2)}
 }
+\value{
+vector half in length of input vector
+}
 \description{
 Cut vector into half
 }

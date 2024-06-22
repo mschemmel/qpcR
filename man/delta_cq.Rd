@@ -9,9 +9,12 @@ delta_cq(df)
 \arguments{
 \item{df}{clean data of given group}
 }
+\value{
+a data frame with added columns 'ref_mean' and 'delta_cq' as prerequisite for relative expression calculation
+}
 \description{
 Calculate delta cq values per comparison
 }
 \examples{
-delta_cq(df, contr_mean)
+delta_cq(df)
 }

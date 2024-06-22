@@ -2,12 +2,12 @@
 % Please edit documentation in R/qpcR.r
 \name{qpcR}
 \alias{qpcR}
-\title{Main function to perform calculation of relative expression of qpcr data}
+\title{Main function to perform calculation of relative expression values of qpcr data}
 \usage{
 qpcR(
   df,
   hkg = NULL,
-  reference = "control",
+  reference = NULL,
   groups = NULL,
   aggregate = TRUE,
   outlier = TRUE,
@@ -29,8 +29,11 @@ qpcR(
 
 \item{outlier.method}{character string to choose the method to remove outliers (default: interquartile)}
 }
+\value{
+data frame of relative expression values compared by provided groups and housekeeping genes
+}
 \description{
-Main function to perform calculation of relative expression of qpcr data
+Main function to perform calculation of relative expression values of qpcr data
 }
 \examples{
 qpcr(df, hkg = c("HKG"))

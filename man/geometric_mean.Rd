@@ -9,6 +9,9 @@ geometric_mean(values)
 \arguments{
 \item{values}{vector of numeric values}
 }
+\value{
+geometric mean of numeric input vector
+}
 \description{
 Calculate geometric mean if multiple housekeeping genes are given
 }
