@@ -15,6 +15,4 @@ numeric vector of E values based on provided efficiency
 \description{
 Calculate E value of standard samples
 }
-\examples{
-get_E(c(87,67,98,78))
-}
+\keyword{internal}

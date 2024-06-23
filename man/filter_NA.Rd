@@ -15,6 +15,4 @@ data frame without NA values in cq column by removing sample specific values per
 \description{
 Sanitize groups if NA in input data
 }
-\examples{
-sanitize(df)
-}
+\keyword{internal}

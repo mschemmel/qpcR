@@ -15,6 +15,4 @@ clean data frame of input data (type conversion, adding default values, calculat
 \description{
 Prepare input data
 }
-\examples{
-prepare(df)
-}
+\keyword{internal}

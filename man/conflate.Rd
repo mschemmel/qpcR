@@ -17,6 +17,4 @@ the final output of calculated relative expression values
 \description{
 Summarize expression data
 }
-\examples{
-conflate(df)
-}
+\keyword{internal}

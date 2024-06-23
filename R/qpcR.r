@@ -8,10 +8,14 @@ qenv <- new.env()
 #' @param aggregate boolean if output should be aggregated by groups or not (reference will equal 1, default = TRUE)
 #' @param outlier boolean if outlier should be detected and removed before calculation of relative expression values (default = TRUE)
 #' @param outlier.method character string to choose the method to remove outliers (default: interquartile)
-#' @returns data frame of relative expression values compared by provided groups and housekeeping genes
+#' @return data frame of relative expression values compared by provided groups and housekeeping genes
 #' @export
 #' @examples
-#' qpcr(df, hkg = c("HKG"))
+#' df <- data.frame(treatment = rep(c("Control", "Infected"), 2, each = 6),
+#'                  gene = rep(c("Kinase","Actin"), 4, each = 3),
+#'                  dpi = c(rep("2dpi", 12), rep("4dpi", 12)),
+#'                  cq = sample(24))
+#' qpcR(df, hkg = c("Actin"), groups = "dpi")
 qpcR <- function(df, hkg = NULL, reference = NULL, groups = NULL, aggregate = TRUE, outlier = TRUE, outlier.method = "interquartile") {
     # check input parameter
     if (is.null(hkg)) stop("No housekeeping gene(s) provided.")

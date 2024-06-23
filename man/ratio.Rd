@@ -15,6 +15,4 @@ a data frame with added column 'ratio' containing efficiency based ratio values 
 \description{
 Calculate efficiency based ratio of delta cq value
 }
-\examples{
-ratio(df)
-}
+\keyword{internal}

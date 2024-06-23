@@ -17,6 +17,4 @@ a lists of calculated ratios (data frame) for every housekeeping vs. target gene
 \description{
 Apply calculation for every HKG vs. target pair
 }
-\examples{
-pair_wise(pair, hkg)
-}
+\keyword{internal}

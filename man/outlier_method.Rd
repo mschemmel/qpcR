@@ -17,6 +17,4 @@ boolean vector of numeric input data if outlier were detected by choosed method
 \description{
 Check for outliers in expression values
 }
-\examples{
-outlier_method(x)
-}
+\keyword{internal}

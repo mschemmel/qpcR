@@ -17,6 +17,4 @@ a list of all target x housekeeping gene combinations
 \description{
 Get all combinations of target and housekeeping genes as list
 }
-\examples{
-comp_gene_pair(df, "HKG")
-}
+\keyword{internal}

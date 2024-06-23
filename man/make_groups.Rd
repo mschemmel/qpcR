@@ -19,6 +19,4 @@ a list of all target x housekeeping x group combinations
 \description{
 Create chunks of groups for calculation
 }
-\examples{
-make_groups(df, hkg = "HKG", groups = c("plate", "diet", "timepoint"))
-}
+\keyword{internal}

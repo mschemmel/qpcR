@@ -17,6 +17,4 @@ data frame with omitted columns
 \description{
 Drop columns based on character vector
 }
-\examples{
-drop_columns(df, cols)
-}
+\keyword{internal}

@@ -17,6 +17,4 @@ vector half in length of input vector
 \description{
 Cut vector into half
 }
-\examples{
-cut_in_half(c(1:10))
-}
+\keyword{internal}

@@ -36,5 +36,9 @@ data frame of relative expression values compared by provided groups and houseke
 Main function to perform calculation of relative expression values of qpcr data
 }
 \examples{
-qpcr(df, hkg = c("HKG"))
+df <- data.frame(treatment = rep(c("Control", "Infected"), 2, each = 6),
+                 gene = rep(c("Kinase","Actin"), 4, each = 3),
+                 dpi = c(rep("2dpi", 12), rep("4dpi", 12)),
+                 cq = sample(24))
+qpcR(df, hkg = c("Actin"), groups = "dpi")
 }

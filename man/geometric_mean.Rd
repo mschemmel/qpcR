@@ -15,6 +15,4 @@ geometric mean of numeric input vector
 \description{
 Calculate geometric mean if multiple housekeeping genes are given
 }
-\examples{
-geometric_mean(c(0.23,0.53,0.12))
-}
+\keyword{internal}

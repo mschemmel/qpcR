@@ -19,6 +19,4 @@ a data frame with removed outlier values based on a selected method ('interquart
 \description{
 Filter outlier of expression values, gene and treatment specific
 }
-\examples{
-filter_outlier(df, method = "interquartile", do = TRUE)
-}
+\keyword{internal}

@@ -15,6 +15,4 @@ standard error of numeric input vector
 \description{
 Calculate standard error
 }
-\examples{
-se(runif(10))
-}
+\keyword{internal}

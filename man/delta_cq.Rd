@@ -15,6 +15,4 @@ a data frame with added columns 'ref_mean' and 'delta_cq' as prerequisite for re
 \description{
 Calculate delta cq values per comparison
 }
-\examples{
-delta_cq(df)
-}
+\keyword{internal}

@@ -17,6 +17,4 @@ character string used as 'reference'
 \description{
 Detect variable of input data used as 'reference'
 }
-\examples{
-detect_reference(c("control", "infected", "inoculated"), "control")
-}
+\keyword{internal}

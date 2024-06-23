@@ -15,6 +15,4 @@ data frame of selected reference group (treatment == reference)
 \description{
 Select control group of data
 }
-\examples{
-get_reference_group(df)
-}
+\keyword{internal}
