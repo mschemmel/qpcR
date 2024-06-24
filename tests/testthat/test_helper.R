@@ -37,3 +37,13 @@ test_that("reference detection reacts properly", {
     expect_error(detect_reference(c("inoculated", "infected"), "test"))
     expect_error(detect_reference(c("inoculated", "infected"), NULL))
 })
+
+test_that("assert works", {
+    expect_no_error(assert(2 == 2))
+    expect_no_error(assert(c(1 == 1, 2 == 2)))
+    expect_error(assert(c(1 == 1, 1 == 2)))
+    expect_error(assert())
+    expect_error(assert(1 == 2))
+    expect_error(assert(1 == 2, "error"))
+    expect_error(assert(c(2 == 2, 2 == 3), "error"), "error")
+})
