@@ -3,7 +3,7 @@
 #' @return data frame without NA values in cq column by removing sample specific values per group to ensure balanced number of observations
 #' @keywords internal
 filter_NA <- function(df) {
-    if (!all(c("brep", "trep") %in% colnames(df))) stop("Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
+    assert(all(c("brep", "trep") %in% colnames(df)), "Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
     df$id <- paste0(df$treatment, df$brep, df$trep)
     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
     return(df)
@@ -52,8 +52,8 @@ se <- function(x) return(sd(x) / sqrt(length(x)))
 #' @return boolean vector of numeric input data if outlier were detected by choosed method
 #' @keywords internal
 outlier_method <- function(x, method) {
-    if (!is.numeric(x)) stop("Input vector for outlier detection is not numeric.")
-    if (!(method %in% c("interquartile", "z-score", "hampel"))) stop("Outlier detection method not supported. Please choose 'interquartile', 'z-score' or 'hampel'.")
+    assert(is.numeric(x), "Input vector for outlier detection is not numeric.")
+    assert(method %in% c("interquartile", "z-score", "hampel"), "Outlier detection method not supported. Please choose 'interquartile', 'z-score' or 'hampel'.")
     switch(method,
            "interquartile" = x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x),
            "z-score" = abs((x - mean(x)) / sd(x)) > 3,
@@ -66,7 +66,7 @@ outlier_method <- function(x, method) {
 #' @return vector half in length of input vector
 #' @keywords internal
 cut_in_half <- function(x, chunk_size = 2) {
-    if (length(x) %% chunk_size != 0) stop("Chunks not equal in length.")
+    assert(length(x) %% chunk_size == 0, "Chunks not equal in length.")
     return(split(x, ceiling(seq_along(x) / (length(x) / chunk_size))))
 }
 

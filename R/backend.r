@@ -47,7 +47,7 @@ comp_gene_pair <- function(df, hkg) {
 #' @return a list of all target x housekeeping x group combinations
 #' @keywords internal
 make_groups <- function(df, hkg, groups = NULL) {
-    if (!all(groups %in% colnames(df))) stop("Not all group(s) in data provided.")
+    assert(all(groups %in% colnames(df)), "Not all group(s) in data provided.")
     if (is.null(groups)) return(comp_gene_pair(df, hkg))
     pairs <- lapply(split(df, as.list(df[groups]), drop = TRUE), function(gr) {
                 if (any(is.na(gr$cq))) gr <- filter_NA(gr)

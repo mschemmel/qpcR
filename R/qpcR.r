@@ -18,8 +18,8 @@ qenv <- new.env()
 #' qpcR(df, hkg = c("Actin"), groups = "dpi")
 qpcR <- function(df, hkg = NULL, reference = NULL, groups = NULL, aggregate = TRUE, outlier = TRUE, outlier.method = "interquartile") {
     # check input parameter
-    if (is.null(hkg)) stop("No housekeeping gene(s) provided.")
-    if (!(all(hkg %in% unique(df$gene)))) stop("Housekeeping gene(s) not present in input data.")
+    assert(!(is.null(hkg)), "No housekeeping gene(s) provided.")
+    assert(all(hkg %in% unique(df$gene)), "Housekeeping gene(s) not present in input data.")
     reference <- detect_reference(unique(df$treatment), reference)
 
     #### main routine ###
