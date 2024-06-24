@@ -1,18 +1,3 @@
-#' Prepare input data
-#' @param df input data.frame of qPCR data
-#' @return clean data frame of input data (type conversion, adding default values, calculate E values of efficiency)
-#' @keywords internal
-prepare <- function(df) {
-    df$cq <- as.numeric(gsub(",", ".", df$cq))
-    if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
-    df$efficiency[is.na(df$efficiency)] <- 100
-    df$E <- get_E(as.numeric(gsub(",", ".", df$efficiency)))
-    cols <- colnames(df)
-    non_affected <- c("cq", "E", "efficiency")
-    df[!(cols %in% non_affected)] <- lapply(df[!(cols %in% non_affected)], as.character)
-    return(df)
-}
-
 #' Sanitize groups if NA in input data
 #' @param df input data.frame containing NA
 #' @return data frame without NA values in cq column by removing sample specific values per group to ensure balanced number of observations
@@ -85,19 +70,11 @@ cut_in_half <- function(x, chunk_size = 2) {
     return(split(x, ceiling(seq_along(x) / (length(x) / chunk_size))))
 }
 
-#' Detect variable of input data used as 'reference'
-#' @param treatment vector of unique character strings found in input data ('treatment' column)
-#' @param reference vector of single reference value
-#' @return character string used as 'reference'
+#' Simple function to assert given conditions
+#' @param statement vector of comparison to proof
+#' @param err_message string of error message when not all comparison are TRUE
+#' @return character string used as error message or nothing if all TRUE
 #' @keywords internal
-detect_reference <- function(treatment, reference) {
-    if (is.null(reference)) {
-        ref_defaults <- c("Control", "control", "Mock", "mock", "Kontrolle", "kontrolle", "C", "c", "K", "k")
-        ref_ <- treatment[treatment %in% ref_defaults]
-        if (identical(unique(ref_), character(0))) stop("No 'reference' variable provided and non auto-detected.")
-        if (length(ref_) > 1) stop("Found more than one 'reference' variable in 'treatment' column.")
-        return(ref_)
-    }
-    if (!(any(reference %in% unique(treatment)))) stop("Variable provided as 'reference' not present in input data.")
-    return(reference)
+assert <- function(statement, err_message = NULL) {
+    if (!all(statement)) stop(err_message)
 }
