@@ -22,11 +22,11 @@ detect_reference <- function(treatment, reference) {
     if (is.null(reference)) {
         ref_defaults <- c("Control", "control", "Mock", "mock", "Kontrolle", "kontrolle", "C", "c", "K", "k")
         ref_ <- treatment[treatment %in% ref_defaults]
-        if (identical(unique(ref_), character(0))) stop("No 'reference' variable provided and non auto-detected.")
-        if (length(ref_) > 1) stop("Found more than one 'reference' variable in 'treatment' column.")
+        assert(!(identical(unique(ref_), character(0))), "No 'reference' variable provided and non auto-detected.")
+        assert(length(ref_) == 1, "Found more than one 'reference' variable in 'treatment' column.")
         return(ref_)
     }
-    if (!(any(reference %in% unique(treatment)))) stop("Variable provided as 'reference' not present in input data.")
+    assert(any(reference %in% unique(treatment)), "Variable provided as 'reference' not present in input data.")
     return(reference)
 }
 
