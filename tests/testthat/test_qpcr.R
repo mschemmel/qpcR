@@ -9,13 +9,13 @@ test_that("qpcR() works", {
     control_groups2 <- aggregate(rexpr ~ gene + dpi, data = run2, FUN = mean)
     expect_equal(unique(control_groups2$rexpr), c(1, 1))
 
-    expect_no_error(qpcR(qpcRdata, hkg = "HKG", groups = "dpi", outlier.method = "interquartile"))
-    expect_no_error(qpcR(qpcRdata, hkg = "HKG", groups = "dpi", outlier.method = "z-score"))
-    expect_no_error(qpcR(qpcRdata, hkg = "HKG", groups = "dpi", outlier.method = "hampel"))
+    expect_no_error(qpcR(dat, hkg = "HKG", groups = "dpi", outlier.method = "interquartile"))
+    expect_no_error(qpcR(dat, hkg = "HKG", groups = "dpi", outlier.method = "z-score"))
+    expect_no_error(qpcR(dat, hkg = "HKG", groups = "dpi", outlier.method = "hampel"))
 
-    expect_no_error(qpcR(qpcRdata, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "interquartile"))
-    expect_no_error(qpcR(qpcRdata, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "z-score"))
-    expect_no_error(qpcR(qpcRdata, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "hampel"))
+    expect_no_error(qpcR(dat, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "interquartile"))
+    expect_no_error(qpcR(dat, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "z-score"))
+    expect_no_error(qpcR(dat, hkg = c("HKG", "HKG2"), groups = "dpi", outlier.method = "hampel"))
 })
 
 test_that("output equals data.frame", {
