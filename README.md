@@ -3,13 +3,26 @@
 <!-- badges: end -->
 
 
-qpcR
----
+# qpcR
 
-Calculate relative gene expression values of qPCR data. Base R. No dependencies.
+Calculate relative gene expression values of raw qPCR data. Base R. No dependencies.
 
-Input data
----
+## Quick start
+Clone the repo using `git clone REPO`.
+
+```r
+library(devtools)
+devtools::load_all(PATH/TO/REPO)
+
+# load example data
+qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
+
+# get mean relative expression
+qpcR(qpcRdata, hkg = "HKG", groups = "dpi")
+```
+In order to get raw values set `aggregate = FALSE`.
+
+## Input data
 The minimal structure of the input data has to contain following columns: `gene`, `treatment`, `cq`. Primer `efficiency` values are optional.
 
 | Column | Description | Note |
@@ -30,23 +43,8 @@ If `cq` contains NA, `brep`, `trep` columns are needed to properly exclude sampl
 An example dataset can be found in the `data` folder.
 
 
-Quick start
----
-Clone the repo using `git clone REPO`. 
 
-```r
-library(devtools)
-devtools::load_all(PATH/TO/REPO)
-
-# load example data
-qpcRdata <- read.table("./data/example2.tsv", sep = "\t", head = TRUE)
-
-# get mean relative expression
-qpcR(qpcRdata, hkg = c("HKG"), groups = "dpi")
-```
-In order to get raw values set `aggregate = FALSE`.
-
-# Output
+## Output
 qpcR outputs a data frame with following columns:
 
 | Column | Description |
