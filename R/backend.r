@@ -5,6 +5,7 @@
 prepare <- function(df) {
     df$cq <- as.numeric(gsub(",", ".", df$cq))
     if (!("efficiency" %in% colnames(df))) df$efficiency <- 100
+    if (in_range(df$efficiency, 0, 1)) df$efficiency <- df$efficiency * 100
     df$efficiency[is.na(df$efficiency)] <- 100
     df$E <- get_E(as.numeric(gsub(",", ".", df$efficiency)))
     cols <- colnames(df)

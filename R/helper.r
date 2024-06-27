@@ -9,6 +9,14 @@ filter_NA <- function(df) {
     return(df)
 }
 
+#' Check if value(s) is in specific range
+#' @param x single value or vector to test
+#' @param min_ minimal allowed value
+#' @param max_ maximal allowed value
+#' @return boolean value of all values are in range
+#' @keywords internal
+in_range <- function(x, min_, max_) return(all(x >= min_ & x <= max_))
+
 #' Calculate E value of standard samples
 #' @param efficiency numeric vector of efficiency values in percent (vector, 0-100)
 #' @return numeric vector of E values based on provided efficiency

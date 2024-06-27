@@ -38,7 +38,7 @@ test_that("reference detection reacts properly", {
     expect_error(detect_reference(c("inoculated", "infected"), NULL))
 })
 
-test_that("assert works", {
+test_that("assert() works", {
     expect_no_error(assert(2 == 2))
     expect_no_error(assert(c(1 == 1, 2 == 2)))
     expect_error(assert(c(1 == 1, 1 == 2)))
@@ -46,4 +46,12 @@ test_that("assert works", {
     expect_error(assert(1 == 2))
     expect_error(assert(1 == 2, "error"))
     expect_error(assert(c(2 == 2, 2 == 3), "error"), "error")
+})
+
+test_that("in_range() works", {
+    expect_equal(in_range(50, 1, 100), TRUE)
+    expect_equal(in_range(1, 1, 100), TRUE)
+    expect_equal(in_range(100, 1, 100), TRUE)
+    expect_equal(in_range(0, 1, 100), FALSE)
+    expect_equal(in_range(101, 1, 100), FALSE)
 })
