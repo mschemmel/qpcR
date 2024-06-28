@@ -21,8 +21,10 @@ in_range <- function(x, min_, max_) return(all(x >= min_ & x <= max_))
 #' @param efficiency numeric vector of efficiency values in percent (vector, 0-100)
 #' @return numeric vector of E values based on provided efficiency
 #' @keywords internal
-get_E <- function(efficiency) { return((efficiency * 0.01) + 1) }
-
+get_E <- function(efficiency) {
+    assert(is.numeric(efficiency), "Efficiency values not of type 'numeric'.")
+    return((efficiency * 0.01) + 1)
+}
 #' Select control group of data
 #' @param df data frame of provided genes
 #' @return data frame of selected reference group (treatment == reference)
@@ -37,6 +39,7 @@ get_reference_group <- function(df) {
 #' @return data frame with omitted columns
 #' @keywords internal
 drop_columns <- function(df, cols = c("brep", "trep", "id")) {
+    assert(is.data.frame(df), "Input of 'drop_columns' not of type data.frame")
     return(df[, names(df)[!(names(df) %in% cols)]])
 }
 
