@@ -39,7 +39,7 @@ If `cq` contains NA, `brep`, `trep` columns are needed to properly exclude sampl
 | `trep` | number of technical replicate |
 
 
-An example dataset can be found in the `data` folder.
+An example dataset can be found in the `inst/extdata` folder.
 
 
 
