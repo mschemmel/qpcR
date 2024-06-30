@@ -31,7 +31,7 @@ The minimal structure of the input data has to contain following columns: `gene`
 | `cq` | cq value measured by qPCR machine | |
 | `efficiency` | primer efficiency values (%)| (optional) assumed to be 100 % if not provided |
 
-If `cq` contains NA, `brep`, `trep` columns are needed to properly exclude samples.
+If `cq` contains NA, `brep`, `trep` or both columns are needed to properly exclude samples.
 
 | Column | Description |
 |--------|-------------|

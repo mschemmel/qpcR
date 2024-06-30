@@ -3,7 +3,7 @@
 #' @return data frame without NA values in cq column by removing sample specific values per group to ensure balanced number of observations
 #' @keywords internal
 filter_NA <- function(df) {
-    assert(all(c("brep", "trep") %in% colnames(df)), "Found NA in 'cq' column. Column 'brep' or 'trep' are required, but not provided.")
+    assert(any(c("brep", "trep") %in% colnames(df)), "Found NA in 'cq' column. Column 'brep' or 'trep' are required.")
     df$id <- paste0(df$treatment, df$brep, df$trep)
     df <- df[!(df$id %in% df[is.na(df$cq), ]$id), ]
     return(df)
