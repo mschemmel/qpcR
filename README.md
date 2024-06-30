@@ -39,9 +39,7 @@ If `cq` contains NA, `brep`, `trep` or both columns are needed to properly exclu
 | `trep` | number of technical replicate |
 
 
-An example dataset can be found in the `inst/extdata` folder.
-
-
+Example datasets can be found in the `inst/extdata` folder.
 
 ## Output
 qpcR outputs a data frame with following columns:
@@ -50,7 +48,7 @@ qpcR outputs a data frame with following columns:
 | ------ | ----------- |
 | treatment | treatments used in your experiment |
 | gene | all investigated genes except housekeeping gene(s) |
-| dpi | your group(s) variable |
+| dpi | your group(s) variable (if input data was grouped) |
 | rexpr.mean | mean expression value |
 | rexpr.sd | standard deviation of expression values |
 | rexpr.se | standard error of expression values |
