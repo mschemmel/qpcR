@@ -1,5 +1,6 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/mschemmel/qpcR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mschemmel/qpcR/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/mschemmel/qpcR/graph/badge.svg?token=1PPYBCNCU7)](https://codecov.io/gh/mschemmel/qpcR)
 <!-- badges: end -->
 
 
