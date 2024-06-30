@@ -29,3 +29,14 @@ test_that("prepare() works", {
     df$efficiency <- 40
     expect_equal(unique(prepare(df)$E), 1.4)
 })
+
+test_that("conflate works()", {
+    run <- get_reference_group(qpcR(dat, hkg = "HKG", reference = "control", groups = "dpi", aggregate = FALSE))
+    control_groups <- aggregate(rexpr ~ gene + dpi, data = run, FUN = mean)
+    expect_equal(unique(control_groups$rexpr), c(1, 1))
+
+    run2 <- get_reference_group(qpcR(dat, hkg = c("HKG", "HKG2"), reference = "control", groups = "dpi", aggregate = FALSE))
+    control_groups2 <- aggregate(rexpr ~ gene + dpi, data = run2, FUN = mean)
+    expect_equal(unique(control_groups2$rexpr), c(1, 1))
+
+})
