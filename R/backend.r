@@ -125,7 +125,7 @@ pair_wise <- function(pair, hkg) {
 #' @keywords internal
 #' @importFrom stats aggregate sd as.formula
 conflate <- function(df, do) {
-    if (!do) return(df[order(df$treatment), ])
+    if (!do) return(drop_columns(df[order(df$treatment), ], c("cq", "ratio", "efficiency", "E", "ref_mean")))
     formula_string <- paste0("rexpr ~ ", paste(c("treatment", "gene", get("groups", qenv)), collapse = "+"))
     stats <- function(x) c("mean" = mean(x), "sd" = sd(x), "se" = se(x), "n" = length(x))
     aggregate_out <- do.call(data.frame, aggregate(as.formula(formula_string), df, stats))
